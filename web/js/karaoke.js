@@ -45,6 +45,7 @@ KaraokeClass.init = function() {
     // Our asynchronous callback
     request.onload = function() {
       var data = request.response;
+      console.log("test");
       initAudio(data);
     };
 
