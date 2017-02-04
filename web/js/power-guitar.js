@@ -24,9 +24,9 @@ PowerGuitar.play = function() {
 
     sources = createSource(buffer);
 //    sources.connect(context.destination);
-    if (!sources.start)
-      sources.start = sources.noteOn;
-    sources.start(time);
+    if (!sources.source.start)
+      sources.source.start = sources.source.noteOn;
+    sources.source.start(time);
   }
 
   var guitar = BUFFERS.guitar;
