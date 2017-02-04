@@ -6,7 +6,6 @@ var RhythmSample = {
 RhythmSample.setBPM = function(b,startTime) {
   this.bpm = b;
   this.startTimer = startTime;
-  console.log("setBPM");
 };
 
 RhythmSample.play = function() {
