@@ -26,5 +26,6 @@ PowerGuitar.setPower = function(num) {
   var gain1 = Math.cos(x * 0.5*Math.PI);
   if(this.source) {
     this.source.gainNode.gain.value = gain1;
+    console.log(gain1);
   }
 };

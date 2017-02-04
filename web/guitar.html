@@ -97,6 +97,7 @@ function init() {
               }else{
                 if(minHeight+resetRange < height){
                   upFlg = true;
+                  PowerGuitar.setPower(0);
                   diff = context.currentTime - beforeTime;
                   diffArraySum += 60/diff;
                   diffArraySum -= diffArray[0];
@@ -184,7 +185,6 @@ function delay() {
     <div id="output"></div>
   </div>
 
-<input type="button" onclick="PowerGuitar.play();" value="Play">
 </div>
 </body>
 </html>
