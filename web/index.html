@@ -2,12 +2,63 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>Leap Motion JavaScript Sample</title>
+  <style>
+    body {
+      margin: 0;
+    }
+    #back {
+      margin: 0;
+      width: 100%;
+      height: 100%;
+      background: url('./img/back.jpg') no-repeat;
+      background-size: cover;
+    }
+    #start {
+      position: relative;
+      /*z-index: -1;*/
+      /*content: '';*/
+      width: 100%;
+      height: 100%;
+      background-color: black;
+      opacity: 0.6;
+
+    }
+    #start:before {
+      position: absolute;
+      content: '';
+      background: url('./img/start.png') no-repeat;
+      background-size: 15%;
+      width: 100%;
+      height: 100%;
+      top: 42.5%;
+      left: 42.5%;
+    }
+    #start > #title {
+      padding-top: 120px;
+      color: white;
+      font-size: 120px;
+      font-weight: bold;
+      text-align: center;
+
+    }
+
+  </style>
 <script src="./js/buffer-loader.js"></script>
 <script src="./js/init.js"></script>
 <script src="./js/rhythm-sample.js"></script>
 <script src="./js/crossfade-sample.js"></script>
 <script>
-window.onload = loadBuffers;
+window.onload =function() {
+	document.getElementById('start').addEventListener('click', function (e) {
+//    document.getElementById()
+		this.style.display = 'none';
+		e.stopPropagation();
+		e.preventDefault();
+		return false;
+	});
+	loadBuffers();
+}
+
 var context;
 var bufferLoader;
 function finishedLoading(bufferList) {
@@ -183,7 +234,13 @@ function delay() {
 </script>
 </head>
 <body onload="">
-<h1>Leap Motion JavaScript Sample </h1>
+<div id="back">
+  <div id="start">
+    <p id="title">合いの手カモン</p>
+  </div>
+</div>
+
+<h1>Leap Motion JavaScript Sample</h1>
 <div id="main">
   <button id="pause" onclick="togglePause()">Pause</button>
   <input type="checkbox" id="pauseOnGesture" onclick="pauseForGestures()">Pause on gesture</input>
