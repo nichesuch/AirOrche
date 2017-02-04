@@ -24,10 +24,10 @@ RhythmSample.play = function() {
 
   // We'll start playing the rhythm 100 milliseconds from "now"
 //  var startTime = context.currentTime + 0.100;
-  var eighthNoteTime = (60 / tempo) / 2;
   var startTime = this.startTimer;
   console.log(startTime + ":" + this.bpm);
   var tempo = this.bpm; // BPM (beats per minute)
+  var eighthNoteTime = (60 / tempo) / 2;
 
   // Play 2 bars of the following:
   for (var bar = 0; bar < 2; bar++) {
