@@ -8,6 +8,7 @@ var BUFFERS_TO_LOAD = {
   type1: 'sound/ifudoudou.mp3',
   type2: 'sound/menuettm.mp3',
   type3: 'sound/hana.mp3',
+  type4: 'sound/clapping-crowd.wav',
   kick: 'sound/kick.wav',
   snare: 'sound/snare.wav',
   hihat: 'sound/hihat.wav',

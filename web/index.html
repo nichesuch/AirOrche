@@ -81,18 +81,21 @@ function init() {
                 //左
                 if(direction < -70) {
                   document.getElementById("output3").innerHTML = '<pre>左</pre>';
-
+                  CrossfadeSample.crossfade(0);
                 //右
               }else if(direction > 70){
                   document.getElementById("output3").innerHTML = '<pre>右</pre>';
+                  CrossfadeSample.crossfade(1);
 
                 //真ん中
                 }else{
                   document.getElementById("output3").innerHTML = '<pre>真ん中</pre>';
+                  CrossfadeSample.crossfade(2);
 
                 }
               }else{
                 document.getElementById("output3").innerHTML = '<pre>なし</pre>';
+                CrossfadeSample.crossfade(3);
               }
             }
 
@@ -135,6 +138,7 @@ function pauseForGestures() {
     pauseOnGesture = false;
   }
 }
+
 </script>
 </head>
 <body onload="init();">
@@ -143,7 +147,7 @@ function pauseForGestures() {
   <button id="pause" onclick="togglePause()">Pause</button>
   <input type="checkbox" id="pauseOnGesture" onclick="pauseForGestures()">Pause on gesture</input>
   <div id="connection">WebSocket not connected</div>
-  <div id="main" style="visibility:hidden">
+  <div id="main" style="">
   t
     <div id="output4">output4</div>
   <br/>

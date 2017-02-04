@@ -1,25 +1,29 @@
 var CrossfadeSample = {playing:false};
 
 var sourceArray;
+var firstIndex = 0;
 
 CrossfadeSample.play = function() {
   // Create three sources.
   this.ctl1 = createSource(BUFFERS.type1);
   this.ctl2 = createSource(BUFFERS.type2);
   this.ctl3 = createSource(BUFFERS.type3);
-  sourceArray = [this.ctl1,this.ctl2,this.ctl3];
+  this.ctl4 = createSource(BUFFERS.type4);
+  sourceArray = [this.ctl1,this.ctl2,this.ctl3,this.ctl4];
   // Mute the second source.
-  sourceArray[0].gainNode.gain.value = 0;
-  sourceArray[2].gainNode.gain.value = 0;
+  foreach(sourceData:sourceArray){
+    sourceData.gainNode.gain.value = 0;
+  }
+  sourceArray[firstIndex].gainNode.gain.value = 100;
   // Start playback in a loop
-  if (!sourceArray[0].source.start) {
-    sourceArray[0].source.noteOn(0);
-    sourceArray[1].source.noteOn(0);
-    sourceArray[2].source.noteOn(0);
+  if (!sourceArray[firstIndex].source.start) {
+    foreach(sourceData:sourceArray){
+      sourceData.source.noteOn(0);
+    }
   } else {
-    sourceArray[0].source.start(0);
-    sourceArray[1].source.start(0);
-    sourceArray[2].source.start(0);
+    foreach(sourceData:sourceArray){
+      sourceData.source.start(0);
+    }
   }
 
   function createSource(buffer) {
@@ -41,14 +45,14 @@ CrossfadeSample.play = function() {
 };
 
 CrossfadeSample.stop = function() {
-  if (!sourceArray[0].source.stop) {
-    sourceArray[0].source.noteOff(0);
-    sourceArray[1].source.noteOff(0);
-    sourceArray[2].source.noteOff(0);
+  if (!sourceArray[firstIndex].source.stop) {
+    foreach(sourceData:sourceArray){
+      sourceData.source.noteOff(0);
+    }
   } else {
-    sourceArray[0].source.stop(0);
-    sourceArray[1].source.stop(0);
-    sourceArray[2].source.stop(0);
+    foreach(sourceData:sourceArray){
+      sourceData.source.stop(0);
+    }
   }
 };
 
@@ -60,9 +64,10 @@ CrossfadeSample.crossfade = function(num) {
   // Use an equal-power crossfading curve:
   var gain1 = Math.cos(x * 0.5*Math.PI);
   var gain2 = Math.cos((1.0 - x) * 0.5*Math.PI);
-  sourceArray[0].gainNode.gain.value = gain2;
-  sourceArray[1].gainNode.gain.value = gain2;
-  sourceArray[2].gainNode.gain.value = gain2;
+
+  foreach(sourceData:sourceArray){
+    sourceData.gainNode.gain.value = gain2;
+  }
   sourceArray[num].gainNode.gain.value = gain1;
 };
 
