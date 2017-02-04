@@ -22,6 +22,8 @@ RhythmSample.SpeedChange = function() {
 
 var startBpm;
 
+var sourceArray;
+
 RhythmSample.play = function() {
   function playSound(buffer, time) {
     var source = context.createBufferSource();
@@ -30,6 +32,7 @@ RhythmSample.play = function() {
     if (!source.start)
       source.start = source.noteOn;
     source.start(time);
+    sourceArray.push(source);
   }
 
   var kick = BUFFERS.kick;
