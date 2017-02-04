@@ -5,6 +5,7 @@
 <script src="./js/buffer-loader.js"></script>
 <script src="./js/init.js"></script>
 <script src="./js/rhythm-sample.js"></script>
+<script src="./js/crossfade-sample.js"></script>
 <script>
 window.onload = loadBuffers;
 var context;
@@ -28,6 +29,8 @@ function finishedLoading(bufferList) {
 <h1>Leap Motion JavaScript Sample</h1>
 <div id="main">
 <input type="button" onclick="RhythmSample.play();" value="Play">
+<input type="button" onclick="CrossfadeSample.toggle();" value="Play/Pause">
+<input type="range" min="0" max="100" value="100" onchange="CrossfadeSample.crossfade(this);">
 </div>
 </body>
 </html>
