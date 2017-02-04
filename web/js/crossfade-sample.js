@@ -4,9 +4,9 @@ var sourceArray;
 
 CrossfadeSample.play = function() {
   // Create three sources.
-  this.ctl1 = createSource(BUFFERS.drums);
-  this.ctl2 = createSource(BUFFERS.organ);
-  this.ctl3 = createSource(BUFFERS.crowd);
+  this.ctl1 = createSource(BUFFERS.type1);
+  this.ctl2 = createSource(BUFFERS.type2);
+  this.ctl3 = createSource(BUFFERS.type3);
   sourceArray = [this.ctl1,this.ctl2,this.ctl3];
   // Mute the second source.
   sourceArray[0].gainNode.gain.value = 0;
@@ -54,7 +54,7 @@ CrossfadeSample.stop = function() {
 
 // Fades between 0 (all source 1) and 1 (all source 2)
 CrossfadeSample.crossfade = function(num) {
-  var x = 1;
+  var x = 0;
   //var x = parseInt(element.value) / parseInt(element.max);
 
   // Use an equal-power crossfading curve:
