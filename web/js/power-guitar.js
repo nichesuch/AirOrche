@@ -29,9 +29,6 @@ PowerGuitar.play = function() {
 
     sources.source.start(time);
     base_vol = 1;
-    setInterval(function(){
-      PowerGuitar.fadeout(0.99);
-    },10);
   }
 
 
