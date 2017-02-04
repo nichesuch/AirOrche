@@ -32,16 +32,8 @@ RhythmSample.play = function() {
   for (var bar = 0; bar < 2; bar++) {
     var time = startTime + bar * 8 * eighthNoteTime;
     // Play the bass (kick) drum on beats 1, 5
-    playSound(kick, time);
-    playSound(kick, time + 4 * eighthNoteTime);
+    playSound(hey, time);
+    playSound(hey, time + 4 * eighthNoteTime);
 
-    // Play the snare drum on beats 3, 7
-    playSound(snare, time + 2 * eighthNoteTime);
-    playSound(snare, time + 6 * eighthNoteTime);
-
-    // Play the hi-hat every eighthh note.
-    for (var i = 0; i < 8; ++i) {
-      playSound(hihat, time + i * eighthNoteTime);
-    }
   }
 };
