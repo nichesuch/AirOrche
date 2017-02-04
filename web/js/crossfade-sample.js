@@ -89,7 +89,7 @@ CrossfadeSample.SpeedChange = function() {
   // Use an equal-power crossfading curve:
 
   for (var i = 0; i < sourceArray.length; i++) {
-    sourceArray[i].playbackRate.value = this.bpm;
+    sourceArray[i].buffer.playbackRate.value = this.bpm;
   }
 };
 
