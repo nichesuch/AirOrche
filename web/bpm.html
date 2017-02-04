@@ -94,16 +94,16 @@ function init() {
               }else{
                 if(minHeight+resetRange < height){
                   upFlg = true;
-                  diff = obj.timestamp - beforeTime;
+                  diff = context.currentTime - beforeTime;
                   bpm = 1000000*60/diff;
                   RhythmSample.setBPM(bpm,beforeBeetTime);
-                  beforeTime = obj.timestamp;
+                  beforeTime = context.currentTime;
                   maxHeight = -999;
                   document.getElementById("output3").innerHTML = 'bpm:' + bpm  + '</pre>';
                   console.log(3);
                 }else if(minHeight > height) {
                   minHeight = height;
-                  beforeBeetTime = obj.timestamp;
+                  beforeBeetTime = context.currentTime;
                   document.getElementById("output").innerHTML = 'bpmTime:' + beforeBeetTime  + '</pre>';
                   console.log(4);
                 }
