@@ -10,7 +10,6 @@
 window.onload = loadBuffers;
 var context;
 var bufferLoader;
-
 function finishedLoading(bufferList) {
   // Create two sources and play them both together.
   var source1 = context.createBufferSource();
@@ -160,6 +159,7 @@ function pauseForGestures() {
 
 function delay() {
   setTimeout(function(){
+    CrossfadeSample.play();
     init();
   },5000);
 }
