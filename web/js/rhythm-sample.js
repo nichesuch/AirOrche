@@ -1,5 +1,10 @@
-var RhythmSample = {
+var RhythmSample = {bpm:0,startTime:0
 };
+
+RhythmSample.setBPM = function(b,startTime) {
+  this.bpm = b;
+  this.startTimer = startTime;
+}
 
 RhythmSample.play = function() {
   function playSound(buffer, time) {
@@ -16,9 +21,10 @@ RhythmSample.play = function() {
   var hihat = BUFFERS.hihat;
 
   // We'll start playing the rhythm 100 milliseconds from "now"
-  var startTime = context.currentTime + 0.100;
-  var tempo = 80; // BPM (beats per minute)
+//  var startTime = context.currentTime + 0.100;
   var eighthNoteTime = (60 / tempo) / 2;
+  var startTime = this.startTimer + eighthNoteTime;
+  var tempo = this.bpm; // BPM (beats per minute)
 
   // Play 2 bars of the following:
   for (var bar = 0; bar < 2; bar++) {
