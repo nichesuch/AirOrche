@@ -8,8 +8,7 @@ PowerGuitar.play = function() {
     var source = context.createBufferSource();
     var gainNode = context.createGain ? context.createGain() : context.createGainNode();
     source.buffer = buffer;
-    // Turn on looping
-    source.loop = true;
+    source.loop = false;
     // Connect source to gain.
     source.connect(gainNode);
     // Connect gain to destination.
@@ -26,6 +25,7 @@ PowerGuitar.play = function() {
 //    sources.connect(context.destination);
     if (!sources.source.start)
       sources.source.start = sources.source.noteOn;
+
     sources.source.start(time);
   }
 
@@ -36,7 +36,7 @@ PowerGuitar.play = function() {
 
 
 PowerGuitar.setPower = function(num) {
-  var x = num/20;
+  var x = (num-20)/20;
   //var x = parseInt(element.value) / parseInt(element.max);
 
   // Use an equal-power crossfading curve:
