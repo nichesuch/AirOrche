@@ -14,20 +14,7 @@ CrossfadeSample.init = function() {
   for (var i = 0; i < sourceArray.length; i++) {
     sourceArray[i].gainNode.gain.value = 0;
   }
-  sourceArray[firstIndex].gainNode.gain.value = 100;  
-}
-
-CrossfadeSample.play = function() {
-  // Start playback in a loop
-  if (!sourceArray[firstIndex].source.start) {
-    for (var i = 0; i < sourceArray.length; i++) {
-      sourceArray[i].source.noteOn(0);
-    }
-  } else {
-    for (var i = 0; i < sourceArray.length; i++) {
-      sourceArray[i].source.start(0);
-    }
-  }
+  sourceArray[firstIndex].gainNode.gain.value = 100;
 
   function createSource(buffer) {
     var source = context.createBufferSource();
@@ -45,6 +32,21 @@ CrossfadeSample.play = function() {
       gainNode: gainNode
     };
   }
+
+}
+
+CrossfadeSample.play = function() {
+  // Start playback in a loop
+  if (!sourceArray[firstIndex].source.start) {
+    for (var i = 0; i < sourceArray.length; i++) {
+      sourceArray[i].source.noteOn(0);
+    }
+  } else {
+    for (var i = 0; i < sourceArray.length; i++) {
+      sourceArray[i].source.start(0);
+    }
+  }
+
 };
 
 CrossfadeSample.stop = function() {
