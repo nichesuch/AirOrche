@@ -21,6 +21,7 @@ RhythmSample.play = function() {
   var kick = BUFFERS.kick;
   var snare = BUFFERS.snare;
   var hihat = BUFFERS.hihat;
+  var hey = BUFFERS.hey;
 
   // We'll start playing the rhythm 100 milliseconds from "now"
 //  var startTime = context.currentTime + 0.100;
