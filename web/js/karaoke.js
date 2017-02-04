@@ -55,13 +55,15 @@ KaraokeClass.init = function() {
             audioFile = data;
             document.getElementById('filedrag').innerHTML = 'OK';
 
-
             // var currentSong = document.getElementById('current-song');
-            // var dv = new jDataView(this.result);
+            var dv = new jDataView(this.result);
+
 
             // "TAG" starts at byte -128 from EOF.
             // See http://en.wikipedia.org/wiki/ID3
-            // if (dv.getString(3, dv.byteLength - 128) == 'TAG') {
+             if (dv.getString(3, dv.byteLength - 128) == 'TAG') {
+               document.getElementById('title').innerHTML = dv.getString(30, dv.tell());
+             }
             //     var title = dv.getString(30, dv.tell());
             //     var artist = dv.getString(30, dv.tell());
             //     var album = dv.getString(30, dv.tell());
