@@ -1,15 +1,16 @@
 var PowerGuitar = {
-  source:null
 };
+
+var sources;
 
 PowerGuitar.play = function() {
   function playSound(buffer, time) {
-    this.source = context.createBufferSource();
-    this.source.buffer = buffer;
-    this.source.connect(context.destination);
+    sources = context.createBufferSource();
+    sources.buffer = buffer;
+    sources.connect(context.destination);
     if (!this.source.start)
-      this.source.start = this.source.noteOn;
-    this.source.start(time);
+      sources.start = sources.noteOn;
+    sources.start(time);
   }
 
   var guitar = BUFFERS.guitar;
@@ -24,8 +25,8 @@ PowerGuitar.setPower = function(num) {
 
   // Use an equal-power crossfading curve:
   var gain1 = Math.cos(x * 0.5*Math.PI);
-  if(this.source) {
-    this.source.gainNode.gain.value = gain1;
-    console.log(gain1);
+  console.log(gain1);
+  if(sources) {
+    sources.gainNode.gain.value = gain1;
   }
 };
