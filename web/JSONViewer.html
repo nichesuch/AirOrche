@@ -49,8 +49,39 @@ function init() {
     ws.onmessage = function(event) {
         if (!paused) {
             var obj = JSON.parse(event.data);
-            var str = JSON.stringify(obj.r, undefined, 2);
-            document.getElementById("output").innerHTML = '<pre>' + str + '</pre>';
+
+            if(obj.hands && obj.hands[0] && obj.hands[0].direction[0]) {
+              document.getElementById("output2").innerHTML = '<pre>' + parseInt(obj.hands[0].direction[0]*10) + '</pre>';
+            }
+            if(obj.pointables && obj.pointables[0] && obj.pointables[0].touchDistance) {
+              document.getElementById("output3").innerHTML = '<pre>' + parseInt(obj.pointables[0].touchDistance*10) + '</pre>';
+            }
+            if(obj.t) {
+              document.getElementById("output4").innerHTML = '向き:' + parseInt(obj.t[0])+"<br> 奥行き: "+parseInt(obj.t[2]) + '</pre>';
+
+              direction = parseInt(obj.t[0]);
+              depth = parseInt(obj.t[2]);
+
+              if(depth < 0) {
+                //左
+                if(direction < -50) {
+                  document.getElementById("output3").innerHTML = '<pre>左</pre>';
+
+                //右
+                }else if(direction > 50){
+                  document.getElementById("output3").innerHTML = '<pre>右</pre>';
+
+                //真ん中
+                }else{
+                  document.getElementById("output3").innerHTML = '<pre>真ん中</pre>';
+
+                }
+              }else{
+                document.getElementById("output3").innerHTML = '<pre>なし</pre>';
+              }
+            }
+
+
             if (pauseOnGesture && obj.gestures.length > 0) {
                 togglePause();
             }
@@ -97,6 +128,11 @@ function pauseForGestures() {
 <input type="checkbox" id="pauseOnGesture" onclick="pauseForGestures()">Pause on gesture</input>
 <div id="connection">WebSocket not connected</div>
 <div id="main" style="visibility:hidden">
+t
+  <div id="output4">output4</div>
+<br/>
+  <div id="output3">output3</div>
+  <div id="output2">output2</div>
   <h3>JSON Frame data:</h3>
   <div id="output"></div>
 </div>
