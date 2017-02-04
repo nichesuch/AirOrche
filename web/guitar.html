@@ -3,8 +3,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>Leap Motion JavaScript Sample</title>
 <script src="./js/buffer-loader.js"></script>
-<script src="./js/init.js"></script>
-<script src="./js/rhythm-sample.js"></script>
+<script src="./js/init2.js"></script>
+<script src="./js/power-guitar.js"></script>
 <script>
 window.onload = loadBuffers;
 var context;
@@ -104,7 +104,6 @@ function init() {
                   diffArrayCnt++;
                   if(diffArrayCnt>=10) diffArrayCnt=10;
                   bpm = diffArraySum / diffArrayCnt;
-                  RhythmSample.setBPM(bpm,beforeBeetTime);
                   beforeTime = context.currentTime;
                   maxHeight = height;
                   document.getElementById("output3").innerHTML = 'bpm:' + bpm  + '</pre>';
@@ -115,6 +114,7 @@ function init() {
                   beforeBeetTime = context.currentTime;
                   //document.getElementById("output").innerHTML = 'bpmTime:' + beforeBeetTime  + '</pre>';
                   document.getElementById("output").innerHTML = 'speed:' + heightspeed  + '</pre>';
+                  PowerGuitar.setPower(heightspeed);
                   console.log(4);
                 }
               }
@@ -183,11 +183,7 @@ function delay() {
     <div id="output"></div>
   </div>
 
-<input type="button" onclick="RhythmSample.play();" value="Play">
-<input type="button" onclick="CrossfadeSample.toggle();" value="Play/Pause">
-<input type="button" onclick="CrossfadeSample.crossfade(0);" value="type1">
-<input type="button" onclick="CrossfadeSample.crossfade(1);" value="type2">
-<input type="button" onclick="CrossfadeSample.crossfade(2);" value="type3">
+<input type="button" onclick="PowerGuitar.play();" value="Play">
 </div>
 </body>
 </html>
