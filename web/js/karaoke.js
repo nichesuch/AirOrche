@@ -29,7 +29,7 @@
       playSound('audio/sing_donguri.m4a')
     }, false);
     */
-    playSound('audio/sing_donguri.m4a');
+    playSound('sound/sing_donguri.m4a');
   }
 
   // plays a file
