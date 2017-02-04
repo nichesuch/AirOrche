@@ -1,20 +1,26 @@
-<!DOCTYPE html>
-<!------------------------------------------------------------------------------
-| Copyright (C) 2012-2013 Leap Motion, Inc. All rights reserved.               |
-| Leap Motion proprietary and confidential. Not for distribution.              |
-| Use subject to the terms of the Leap Motion SDK Agreement available at       |
-| https://developer.leapmotion.com/sdk_agreement, or another agreement         |
-| between Leap Motion and you, your company or other organization.             |
-------------------------------------------------------------------------------->
 <html>
 <head>
-<title>Leap WebSocket JSON Viewer</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Leap Motion JavaScript Sample</title>
 <script>
 var ws;
 var paused = false;
 var pauseOnGesture = false;
 var focusListener;
 var blurListener;
+
+var nowType = -1;
+
+var minHeight = 999;
+var maxHeight = -1;
+var resetRange = 40;
+var beforeTime = -1;
+var upFlg = false;
+
+var beforeBeetTime = -1;
+
+var bpm = 0;
+var diffArray = [];
 
 // Support both the WebSocket and MozWebSocket objects
 if ((typeof(WebSocket) == 'undefined') &&
@@ -49,10 +55,36 @@ function init() {
     ws.onmessage = function(event) {
         if (!paused) {
             var obj = JSON.parse(event.data);
-//console.log(obj);
+
             if(obj.t) {
               height = parseInt(obj.t[1]);
               document.getElementById("output4").innerHTML = '高さ:' + height  + '</pre>';
+              document.getElementById("output2").innerHTML = '最低高さ:' + minHeight  + '</pre>';
+              if(upFlg) {
+                if(maxHeight-resetRange > height){
+                  upFlg = false;
+                  minHeight = 999;
+                  console.log(1);
+                } else if(maxHeight < height) {
+                  maxHeight = height;
+                  console.log(2);
+                }
+              }else{
+                if(minHeight+resetRange < height){
+                  upFlg = true;
+                  diff = obj.timestamp - beforeTime;
+                  bpm = 1000000*60/diff;
+                  beforeTime = obj.timestamp;
+                  maxHeight = -1;
+                  document.getElementById("output3").innerHTML = 'bpm:' + bpm  + '</pre>';
+                  console.log(3);
+                }else if(minHeight > height) {
+                  minHeight = height;
+                  beforeBeetTime = obj.timestamp;
+                  document.getElementById("output").innerHTML = 'bpmTime:' + beforeBeetTime  + '</pre>';
+                  console.log(4);
+                }
+              }
             }
 
             if (pauseOnGesture && obj.gestures.length > 0) {
@@ -93,21 +125,36 @@ function pauseForGestures() {
     pauseOnGesture = false;
   }
 }
+
+function delay() {
+  setTimeout(function(){
+    init();
+  },100);
+}
+
 </script>
 </head>
-<body onload="init();">
-<h1>Leap WebSocket JSON Viewer</h1>
-<button id="pause" onclick="togglePause()">Pause</button>
-<input type="checkbox" id="pauseOnGesture" onclick="pauseForGestures()">Pause on gesture</input>
-<div id="connection">WebSocket not connected</div>
-<div id="main" style="visibility:hidden">
-t
-  <div id="output4">output4</div>
-<br/>
-  <div id="output3">output3</div>
-  <div id="output2">output2</div>
-  <h3>JSON Frame data:</h3>
-  <div id="output"></div>
+<body onload="delay();">
+<h1>Leap Motion JavaScript Sample</h1>
+<div id="main">
+  <button id="pause" onclick="togglePause()">Pause</button>
+  <input type="checkbox" id="pauseOnGesture" onclick="pauseForGestures()">Pause on gesture</input>
+  <div id="connection">WebSocket not connected</div>
+  <div id="main" style="">
+  t
+    <div id="output4">output4</div>
+  <br/>
+    <div id="output3">output3</div>
+    <div id="output2">output2</div>
+    <h3>JSON Frame data:</h3>
+    <div id="output"></div>
+  </div>
+
+<input type="button" onclick="RhythmSample.play();" value="Play">
+<input type="button" onclick="CrossfadeSample.toggle();" value="Play/Pause">
+<input type="button" onclick="CrossfadeSample.crossfade(0);" value="type1">
+<input type="button" onclick="CrossfadeSample.crossfade(1);" value="type2">
+<input type="button" onclick="CrossfadeSample.crossfade(2);" value="type3">
 </div>
 </body>
 </html>
