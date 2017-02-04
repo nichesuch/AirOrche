@@ -30,11 +30,11 @@ RhythmSample.play = function() {
   var startTime = this.startTimer + ((60 / tempo));
 
   // Play 2 bars of the following:
-  for (var bar = 0; bar < 2; bar++) {
+  for (var bar = 0; bar < 1; bar++) {
     var time = startTime + bar * 8 * eighthNoteTime;
     // Play the bass (kick) drum on beats 1, 5
     playSound(hey, time);
-    playSound(hey, time + 2 * eighthNoteTime);
+    playSound(hey, time + 1 * eighthNoteTime);
 
   }
 };
