@@ -3,20 +3,72 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>Leap Motion JavaScript Sample</title>
   <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    li {
+      list-style: none;
+    }
     body {
       margin: 0;
+      background-color: #f1f1f1;
     }
-    #back {
-      margin: 0;
+    header {
+      height: 40px;
+      padding: 5px 10px;
+      background-color: hotpink;
+      position: fixed;
+      z-index: 999999;
       width: 100%;
-      height: 100%;
+      top: 0;
+      left: 0;
+    }
+    header > * {
+      display: inline-block;
+    }
+    header > .left {
+      float: left;
+    }
+    header > .right {
+      float: right;
+    }
+    #logo {
+      font-weight: bold;
+      color: white;
+      font-size: 20px;
+      padding-left: 10px;
+    }
+    #logout {
+      padding-top: 2px;
+      color: white;
+    }
+    article {
+      padding: 10px;
+      padding-top: 50px;
+      width: 1000px;
+      margin: 0 auto;
+    }
+    article > #content {
+      display: table;
+      width:100%;
+    }
+    article > #content > * {
+      display: table-cell;
+      vertical-align: top;
+    }
+    #music {
+      margin: 0;
+      width: 700px;
+      height: 450px;
+
       background: url('./img/back.jpg') no-repeat;
       background-size: cover;
     }
     #start {
       position: relative;
-      /*z-index: -1;*/
-      /*content: '';*/
+      top:0;
       width: 100%;
       height: 100%;
       background-color: black;
@@ -34,13 +86,53 @@
       left: 42.5%;
     }
     #start > #title {
-      padding-top: 120px;
+      padding-top: 60px;
       color: white;
-      font-size: 120px;
+      font-size: 80px;
       font-weight: bold;
       text-align: center;
+      margin: 0;
 
     }
+    #play_list {
+      padding-left: 10px;
+
+    }
+    #play_list ul {
+      width: 100%;
+      height: 450px;
+      overflow-y: scroll;
+      cursor: pointer;
+    }
+    #play_list ul li {
+      height: 100px;
+      width: 100%;
+      border: solid 1px lightgray;
+      background-color: white;
+      padding: 5px;
+      margin: 5px 0;
+      border-radius: 2px;
+      box-shadow: 0 1px 1px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.08);
+    }
+    #play_list ul li:first-child {
+       margin-top: 0;
+     }
+    #play_list ul li > * {
+      display: inline-block;
+    }
+    #play_list ul li .image {
+      width: 130px;
+    }
+    #play_list ul li img {
+      width: 100%;
+    }
+    #play_list ul li .title {
+      width: 100px;
+      height: 100%;
+      vertical-align: top;
+      color: #333;
+    }
+
 
   </style>
 <script src="./js/buffer-loader.js"></script>
@@ -235,11 +327,63 @@ function delay() {
 </script>
 </head>
 <body onload="">
-<div id="back">
-  <div id="start">
-    <p id="title">合いの手カモン</p>
+<header>
+  <div id="logo" class="left">
+    合いの手カモン
   </div>
-</div>
+  <div id="logout" class="right">
+    ログアウト
+  </div>
+</header>
+<article>
+  <section id="content">
+    <div id="music">
+      <div id="start">
+        <p id="title">どんぐりころころ</p>
+      </div>
+    </div>
+    <div id="play_list">
+      <ul>
+        <li>
+          <div class="image"><img src="./img/kuma.jpg" alt=""></div>
+          <div class="title">森のくまさん</div>
+        </li>
+        <li>
+          <div class="image"><img src="./img/kuma.jpg" alt=""></div>
+          <div class="title">森のくまさん</div>
+        </li>
+        <li>
+          <div class="image"><img src="./img/kuma.jpg" alt=""></div>
+          <div class="title">森のくまさん</div>
+        </li>
+        <li>
+          <div class="image"><img src="./img/kuma.jpg" alt=""></div>
+          <div class="title">森のくまさん</div>
+        </li>
+        <li>
+          <div class="image"><img src="./img/kuma.jpg" alt=""></div>
+          <div class="title">森のくまさん</div>
+        </li>
+        <li>
+          <div class="image"><img src="./img/kuma.jpg" alt=""></div>
+          <div class="title">森のくまさん</div>
+        </li>
+        <li>
+          <div class="image"><img src="./img/kuma.jpg" alt=""></div>
+          <div class="title">森のくまさん</div>
+        </li>
+        <li>
+          <div class="image"><img src="./img/kuma.jpg" alt=""></div>
+          <div class="title">森のくまさん</div>
+        </li>
+
+      </ul>
+    </div>
+  </section>
+
+</article>
+
+
 
 <h1>Leap Motion JavaScript Sample</h1>
 <div id="main">
