@@ -4,7 +4,7 @@ bpm:-1};
 var sourceArray;
 var firstIndex = 0;
 
-CrossfadeSample.setBPM(b) {
+CrossfadeSample.setBPM = function(b) {
   this.bpm = b;
 }
 
