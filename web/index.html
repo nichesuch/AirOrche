@@ -321,7 +321,7 @@ function pauseForGestures() {
 }
 
 function startSong() {
-  this.style.display = 'none';
+  document.getElementById('start').style.display = 'none';
   e.stopPropagation();
   e.preventDefault();
   CrossfadeSample.toggle();
