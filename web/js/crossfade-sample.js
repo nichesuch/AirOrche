@@ -11,17 +11,17 @@ CrossfadeSample.play = function() {
   this.ctl4 = createSource(BUFFERS.type4);
   sourceArray = [this.ctl1,this.ctl2,this.ctl3,this.ctl4];
   // Mute the second source.
-  for(int i : sourceArray.length){
+  for (var i = 0, i < sourceArray.length; i++) {
     sourceArray[i].gainNode.gain.value = 0;
   }
   sourceArray[firstIndex].gainNode.gain.value = 100;
   // Start playback in a loop
   if (!sourceArray[firstIndex].source.start) {
-    for(int i : sourceArray.length){
+    for (var i = 0, i < sourceArray.length; i++) {
       sourceArray[i].source.noteOn(0);
     }
   } else {
-    for(int i : sourceArray.length){
+    for (var i = 0, i < sourceArray.length; i++) {
       sourceArray[i].source.start(0);
     }
   }
@@ -46,11 +46,11 @@ CrossfadeSample.play = function() {
 
 CrossfadeSample.stop = function() {
   if (!sourceArray[firstIndex].source.stop) {
-    for(int i : sourceArray.length){
+    for (var i = 0, i < sourceArray.length; i++) {
       sourceArray[i].source.noteOff(0);
     }
   } else {
-    for(int i : sourceArray.length){
+    for (var i = 0, i < sourceArray.length; i++) {
       sourceArray[i].source.stop(0);
     }
   }
@@ -65,7 +65,7 @@ CrossfadeSample.crossfade = function(num) {
   var gain1 = Math.cos(x * 0.5*Math.PI);
   var gain2 = Math.cos((1.0 - x) * 0.5*Math.PI);
 
-  for(int i : sourceArray.length){
+  for (var i = 0, i < sourceArray.length; i++) {
     sourceArray[i].gainNode.gain.value = gain2;
   }
   sourceArray[num].gainNode.gain.value = gain1;
