@@ -1,6 +1,5 @@
 var RhythmSample = {
-  bpm:120,
-
+  bpm:120
 };
 
 RhythmSample.setBPM = function(b) {
@@ -23,7 +22,7 @@ RhythmSample.play = function() {
 
   // We'll start playing the rhythm 100 milliseconds from "now"
   var startTime = context.currentTime + 0.100;
-  var tempo = 20; // BPM (beats per minute)
+  var tempo = this.bpm; // BPM (beats per minute)
   var eighthNoteTime = (60 / tempo) / 2;
 
   // Play 2 bars of the following:
