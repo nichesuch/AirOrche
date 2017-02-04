@@ -23,7 +23,7 @@ RhythmSample.SpeedChange = function() {
 
 var startBpm;
 
-var sourceArray;
+var sourceArray = [];
 
 RhythmSample.play = function() {
   function playSound(buffer, time) {
