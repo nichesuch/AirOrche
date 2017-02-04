@@ -57,7 +57,7 @@ CrossfadeSample.init = function() {
     // Create and specify parameters for the low-pass filter.
     filter.type = 'notch'; // Low-pass filter. See BiquadFilterNode docs
     filter.frequency.value = 600; // Set cutoff to 600 HZ
-    filter.Q.value = 4; // Set cutoff to 600 HZ
+    filter.Q.value = 20; // Set cutoff to 600 HZ
 
     filter.gain.value = -1000;
 
