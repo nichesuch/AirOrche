@@ -42,7 +42,8 @@ var upFlg = false;
 var beforeBeetTime = -1;
 
 var bpm = 0;
-var diffArray = [];
+var diffArray = [0,0,0,0,0,0,0,0,0,0];
+var diffArraySum = 0;
 
 // Support both the WebSocket and MozWebSocket objects
 if ((typeof(WebSocket) == 'undefined') &&
@@ -95,7 +96,11 @@ function init() {
                 if(minHeight+resetRange < height){
                   upFlg = true;
                   diff = context.currentTime - beforeTime;
-                  bpm = 60/diff;
+                  diffArraySum += 60/diff;
+                  diffArraySum -= bpmArray[0];
+                  bpmArray.push(60/diff);
+                  bpmArray.shift();
+                  bpm = diffArraySum / diffArraySum.length;
                   RhythmSample.setBPM(bpm,beforeBeetTime);
                   beforeTime = context.currentTime;
                   maxHeight = -999;
