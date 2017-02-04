@@ -38,6 +38,16 @@ if ((typeof(WebSocket) == 'undefined') &&
     WebSocket = MozWebSocket;
 }
 
+
+function toTP(x,y,z) {
+  var theta = parseInt(Math.atan2(x ,z) * 180 / Math.PI);
+  var phi = parseInt(Math.atan2(z, y) * 180 / Math.PI);
+  return {
+    theta: theta,
+    phi: phi
+  }
+}
+
 // Create the socket with event handlers
 function init() {
     // Create and open the socket
@@ -75,10 +85,15 @@ function init() {
             if(obj.t) {
               document.getElementById("output4").innerHTML = '向き:' + parseInt(obj.t[0])+"<br> 奥行き: "+parseInt(obj.t[2]) + '</pre>';
 
+              var x = obj.t[0];
+              var y = obj.t[1];
+              var z = obj.t[2];
+              var t = toTP(x,y,z);
+
               direction = parseInt(obj.t[0]);
               depth = parseInt(obj.t[2]);
 
-              if(depth < -50) {
+              if(t.phi < -50) {
                 //左
                 if(direction < -70) {
                   document.getElementById("output3").innerHTML = '<pre>左</pre>';
