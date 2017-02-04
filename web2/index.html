@@ -1,0 +1,425 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Leap Motion JavaScript Sample</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    li {
+      list-style: none;
+    }
+    body {
+      margin: 0;
+      background-color: #f1f1f1;
+    }
+    header {
+      height: 40px;
+      padding: 5px 10px;
+      background-color: hotpink;
+      position: fixed;
+      z-index: 999999;
+      width: 100%;
+      top: 0;
+      left: 0;
+    }
+    header > * {
+      display: inline-block;
+    }
+    header > .left {
+      float: left;
+    }
+    header > .right {
+      float: right;
+    }
+    #main {
+      display: none;
+    }
+    #logo {
+      font-weight: bold;
+      color: white;
+      font-size: 20px;
+      padding-left: 10px;
+    }
+    #logout {
+      padding-top: 2px;
+      color: white;
+    }
+    article {
+      padding: 10px;
+      padding-top: 50px;
+      width: 1000px;
+      margin: 0 auto;
+    }
+    article > #content {
+      display: table;
+      width:100%;
+    }
+    article > #content > * {
+      display: table-cell;
+      vertical-align: top;
+    }
+    #music {
+      margin: 0;
+      width: 700px;
+      height: 450px;
+
+      background: url('./img/back.jpg') no-repeat;
+      background-size: cover;
+    }
+    #start {
+      position: relative;
+      top:0;
+      width: 100%;
+      height: 100%;
+      background-color: black;
+      opacity: 0.6;
+
+    }
+    #start:before {
+      position: absolute;
+      content: '';
+      background: url('./img/start.png') no-repeat;
+      background-size: 15%;
+      width: 100%;
+      height: 100%;
+      top: 42.5%;
+      left: 42.5%;
+    }
+    #start > #title {
+      padding-top: 60px;
+      color: white;
+      font-size: 80px;
+      font-weight: bold;
+      text-align: center;
+      margin: 0;
+
+    }
+    #play_list {
+      padding-left: 10px;
+
+    }
+    #play_list ul {
+      width: 100%;
+      height: 450px;
+      overflow-y: scroll;
+      cursor: pointer;
+    }
+    #play_list ul li {
+      height: 100px;
+      width: 100%;
+      border: solid 1px lightgray;
+      background-color: white;
+      padding: 5px;
+      margin: 5px 0;
+      border-radius: 2px;
+      box-shadow: 0 1px 1px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.08);
+    }
+    #play_list ul li:first-child {
+       margin-top: 0;
+     }
+    #play_list ul li > * {
+      display: inline-block;
+    }
+    #play_list ul li .image {
+      width: 130px;
+    }
+    #play_list ul li img {
+      width: 100%;
+    }
+    #play_list ul li .title {
+      width: 100px;
+      height: 100%;
+      vertical-align: top;
+      color: #333;
+    }
+
+
+  </style>
+<script src="./js/buffer-loader.js"></script>
+<script src="./js/init.js"></script>
+<script src="./js/rhythm-sample.js"></script>
+<script src="./js/crossfade-sample.js"></script>
+<script>
+
+window.onload =function() {
+	document.getElementById('start').addEventListener('click', function (e) {
+//    document.getElementById()
+    //delay();
+		return false;
+	});
+	loadBuffers();
+}
+
+var context;
+var bufferLoader;
+function finishedLoading(bufferList) {
+  // Create two sources and play them both together.
+  var source1 = context.createBufferSource();
+  var source2 = context.createBufferSource();
+  source1.buffer = bufferList[0];
+  source2.buffer = bufferList[1];
+
+  source1.connect(context.destination);
+  source2.connect(context.destination);
+  source1.start(0);
+  source2.start(0);
+}
+</script>
+<script>
+var ws;
+var paused = false;
+var pauseOnGesture = false;
+var focusListener;
+var blurListener;
+
+var nowType = -1;
+
+// Support both the WebSocket and MozWebSocket objects
+if ((typeof(WebSocket) == 'undefined') &&
+    (typeof(MozWebSocket) != 'undefined')) {
+    WebSocket = MozWebSocket;
+}
+
+
+function toTP(x,y,z) {
+  var theta = parseInt(Math.atan2(x ,z) * 180 / Math.PI);
+  var phi = parseInt(Math.atan2(z, y) * 180 / Math.PI);
+  return {
+    theta: theta,
+    phi: phi
+  }
+}
+
+var playing = false;
+
+// Create the socket with event handlers
+function init() {
+    // Create and open the socket
+    ws = new WebSocket("ws://localhost:6437/v6.json");
+
+    // On successful connection
+    ws.onopen = function(event) {
+        var enableMessage = JSON.stringify({enableGestures: true});
+        ws.send(enableMessage); // Enable gestures
+        ws.send(JSON.stringify({focused: true})); // claim focus
+
+        focusListener = window.addEventListener('focus', function(e) {
+                               ws.send(JSON.stringify({focused: true})); // claim focus
+                         });
+
+        blurListener = window.addEventListener('blur', function(e) {
+                               ws.send(JSON.stringify({focused: false})); // relinquish focus
+                         });
+
+        document.getElementById("main").style.visibility = "visible";
+        document.getElementById("connection").innerHTML = "WebSocket connection open!";
+    };
+
+    // On message received
+    ws.onmessage = function(event) {
+        if (!paused) {
+            var obj = JSON.parse(event.data);
+
+            if(obj.hands && obj.hands[0] && obj.hands[0].direction[0]) {
+              document.getElementById("output2").innerHTML = '<pre>' + parseInt(obj.hands[0].direction[0]*10) + '</pre>';
+            }
+            if(obj.pointables && obj.pointables[0] && obj.pointables[0].touchDistance) {
+              document.getElementById("output3").innerHTML = '<pre>' + parseInt(obj.pointables[0].touchDistance*10) + '</pre>';
+              if(!playing) {
+                startSong();
+                playing = true;
+              }
+            }
+            if(obj.t) {
+              document.getElementById("output4").innerHTML = '向き:' + parseInt(obj.t[0])+"<br> 奥行き: "+parseInt(obj.t[2]) + '</pre>';
+
+              var x = obj.t[0];
+              var y = obj.t[1];
+              var z = obj.t[2];
+              var t = toTP(x,y,z);
+
+              direction = parseInt(obj.t[0]);
+              depth = parseInt(obj.t[2]);
+
+              if(t.phi < -50) {
+                //左
+                if(direction < -70) {
+                  document.getElementById("output3").innerHTML = '<pre>左</pre>';
+                  if(CrossfadeSample){
+                    if(nowType != 0) {
+                      CrossfadeSample.crossfade(0);
+                    }
+                  }
+                //右
+              }else if(direction > 70){
+                  document.getElementById("output3").innerHTML = '<pre>右</pre>';
+                  if(CrossfadeSample){
+                    if(nowType != 1) {
+                      CrossfadeSample.crossfade(1);
+                    }
+                  }
+
+                //真ん中
+                }else{
+                  document.getElementById("output3").innerHTML = '<pre>真ん中</pre>';
+                  if(CrossfadeSample){
+                    if(nowType != 2) {
+                      CrossfadeSample.crossfade(2);
+                    }
+                  }
+
+                }
+              }else{
+                document.getElementById("output3").innerHTML = '<pre>なし</pre>';
+                if(CrossfadeSample){
+                  if(nowType != 3) {
+                    CrossfadeSample.crossfade(3);
+                  }
+                }
+
+              }
+            }
+
+
+            if (pauseOnGesture && obj.gestures.length > 0) {
+                togglePause();
+            }
+        }
+    };
+
+    // On socket close
+    ws.onclose = function(event) {
+        ws = null;
+        window.removeListener("focus", focusListener);
+        window.removeListener("blur", blurListener);
+        document.getElementById("main").style.visibility = "hidden";
+        document.getElementById("connection").innerHTML = "WebSocket connection closed";
+    }
+
+    // On socket error
+    ws.onerror = function(event) {
+      alert("Received error");
+    };
+}
+
+function togglePause() {
+  paused = !paused;
+
+  if (paused) {
+    document.getElementById("pause").innerText = "Resume";
+  } else {
+    document.getElementById("pause").innerText = "Pause";
+  }
+}
+
+function pauseForGestures() {
+  if (document.getElementById("pauseOnGesture").checked) {
+    pauseOnGesture = true;
+  } else {
+    pauseOnGesture = false;
+  }
+}
+
+function startSong() {
+  document.getElementById('start').style.display = 'none';
+  CrossfadeSample.toggle();
+}
+
+function delay() {
+  setTimeout(function(){
+    CrossfadeSample.init();
+    init();
+  },3000);
+}
+
+</script>
+</head>
+<body onload="delay();">
+<header>
+  <div id="logo" class="left">
+    合いの手カモン
+  </div>
+  <div id="logout" class="right">
+    ログアウト
+  </div>
+</header>
+<article>
+  <section id="content">
+    <div id="music">
+      <div id="start">
+        <p id="title">どんぐりころころ</p>
+      </div>
+    </div>
+    <div id="play_list">
+      <ul>
+        <li>
+          <div class="image"><img src="./img/kuma.jpg" alt=""></div>
+          <div class="title">森のくまさん</div>
+        </li>
+        <li>
+          <div class="image"><img src="./img/kuma.jpg" alt=""></div>
+          <div class="title">森のくまさん</div>
+        </li>
+        <li>
+          <div class="image"><img src="./img/kuma.jpg" alt=""></div>
+          <div class="title">森のくまさん</div>
+        </li>
+        <li>
+          <div class="image"><img src="./img/kuma.jpg" alt=""></div>
+          <div class="title">森のくまさん</div>
+        </li>
+        <li>
+          <div class="image"><img src="./img/kuma.jpg" alt=""></div>
+          <div class="title">森のくまさん</div>
+        </li>
+        <li>
+          <div class="image"><img src="./img/kuma.jpg" alt=""></div>
+          <div class="title">森のくまさん</div>
+        </li>
+        <li>
+          <div class="image"><img src="./img/kuma.jpg" alt=""></div>
+          <div class="title">森のくまさん</div>
+        </li>
+        <li>
+          <div class="image"><img src="./img/kuma.jpg" alt=""></div>
+          <div class="title">森のくまさん</div>
+        </li>
+
+      </ul>
+    </div>
+  </section>
+
+</article>
+
+
+
+<div id="main">
+<h1>Leap Motion JavaScript Sample</h1>
+  <button id="pause" onclick="togglePause()">Pause</button>
+  <input type="checkbox" id="pauseOnGesture" onclick="pauseForGestures()">Pause on gesture</input>
+  <div id="connection">WebSocket not connected</div>
+  <div id="main" style="">
+  t
+    <div id="output4">output4</div>
+  <br/>
+    <div id="output3">output3</div>
+    <div id="output2">output2</div>
+    <h3>JSON Frame data:</h3>
+    <div id="output"></div>
+  </div>
+<input type="button" onclick="" value="INIT">
+<input type="button" onclick="RhythmSample.play();" value="Play">
+<input type="button" onclick="CrossfadeSample.setBPM(0.75);" value="60">
+<input type="button" onclick="CrossfadeSample.setBPM(1);" value="120">
+<input type="button" onclick="CrossfadeSample.setBPM(1.25);" value="180">
+<input type="button" onclick="CrossfadeSample.SpeedChange();" value="speed">
+<input type="button" onclick="CrossfadeSample.toggle();" value="Play/Pause">
+<input type="button" onclick="CrossfadeSample.crossfade(0);" value="type1">
+<input type="button" onclick="CrossfadeSample.crossfade(1);" value="type2">
+<input type="button" onclick="CrossfadeSample.crossfade(2);" value="type3">
+</div>
+</body>
+</html>
