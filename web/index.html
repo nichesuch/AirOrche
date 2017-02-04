@@ -34,6 +34,9 @@
     header > .right {
       float: right;
     }
+    #main {
+      display: none;
+    }
     #logo {
       font-weight: bold;
       color: white;
@@ -393,8 +396,8 @@ function delay() {
 
 
 
-<h1>Leap Motion JavaScript Sample</h1>
 <div id="main">
+<h1>Leap Motion JavaScript Sample</h1>
   <button id="pause" onclick="togglePause()">Pause</button>
   <input type="checkbox" id="pauseOnGesture" onclick="pauseForGestures()">Pause on gesture</input>
   <div id="connection">WebSocket not connected</div>
