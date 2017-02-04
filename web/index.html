@@ -37,7 +37,7 @@
       float: right;
     }
     #main {
-    /*  display: none; */
+      display: none;
     }
     #logo {
       font-weight: bold;
@@ -393,10 +393,10 @@ document.onkeydown = function(e) {
       startSong();
     }else if(keyCode == 88){
       if(karaokeing) {
-        KaraokeClass.disableKaraoke();
+        KaraokeClass.enableKaraoke();
         karaokeing = false;
       }else{
-        KaraokeClass.enableKaraoke();
+        KaraokeClass.disableKaraoke();
         karaokeing = true;
       }
     }
