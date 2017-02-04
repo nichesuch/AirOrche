@@ -81,21 +81,30 @@ function init() {
                 //左
                 if(direction < -70) {
                   document.getElementById("output3").innerHTML = '<pre>左</pre>';
-                  CrossfadeSample.crossfade(0);
+                  if(CrossfadeSample){
+                    CrossfadeSample.crossfade(0);
+                  }
                 //右
               }else if(direction > 70){
                   document.getElementById("output3").innerHTML = '<pre>右</pre>';
-                  CrossfadeSample.crossfade(1);
+                  if(CrossfadeSample){
+                    CrossfadeSample.crossfade(1);
+                  }
 
                 //真ん中
                 }else{
                   document.getElementById("output3").innerHTML = '<pre>真ん中</pre>';
-                  CrossfadeSample.crossfade(2);
+                  if(CrossfadeSample){
+                    CrossfadeSample.crossfade(2);
+                  }
 
                 }
               }else{
                 document.getElementById("output3").innerHTML = '<pre>なし</pre>';
-                CrossfadeSample.crossfade(3);
+                if(CrossfadeSample){
+                  CrossfadeSample.crossfade(3);
+                }
+
               }
             }
 
