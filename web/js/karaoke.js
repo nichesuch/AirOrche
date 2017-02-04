@@ -1,7 +1,10 @@
-(function () {
-  'use strict';
+var KaraokeClass = {};
 
-  function init() {
+var karaokeEnabled =true;
+var mix,
+    mix2;
+
+KaraokeClass.init = function() {
 
     var filedrag = document.getElementById('filedrag'),
         fileselect = document.getElementById('fileselect'),
@@ -23,7 +26,7 @@
       filedrag.style.display = 'none';
     }
 */
-    var karaokeEnabled = true;
+    karaokeEnabled = true;
 /*
     demoAudio.addEventListener('click', function() {
       playSound('audio/sing_donguri.m4a')
@@ -96,7 +99,7 @@
 
   // call initialization file
   if (window.File && window.FileList && window.FileReader) {
-    init();
+//    init();
   } else {
     alert('Your browser does not support File');
   }
@@ -105,9 +108,7 @@
   var source;
   var processor,
     filterLowPass,
-    filterHighPass,
-    mix,
-    mix2;
+    filterHighPass;
 
   function initAudio(data) {
     if (source) source.stop(0);
@@ -192,15 +193,14 @@
       output[i] = inputL[i] - inputR[i];
     }
   }
+};
 
-  function disableKaraoke() {
+KaraokeClass.disableKaraoke = function() {
     mix2.gain.value = 1;
     mix.gain.value = 0;
-  }
+  };
 
-  function enableKaraoke() {
+KaraokeClass.enableKaraoke = function() {
     mix.gain.value = 1;
     mix2.gain.value = 0;
-  }
-
-})();
+  };

@@ -263,7 +263,7 @@ function init() {
                   if(CrossfadeSample){
                     if(nowType != 0) {
                       //CrossfadeSample.crossfade(0);
-                      enableKaraoke();
+                      KaraokeClass.enableKaraoke();
                     }
                   }
                 //右
@@ -271,7 +271,7 @@ function init() {
                   document.getElementById("output3").innerHTML = '<pre>右</pre>';
                   if(CrossfadeSample){
                     if(nowType != 1) {
-                      disableKaraoke();
+                      KaraokeClass.disableKaraoke();
                     }
                   }
 
@@ -280,7 +280,7 @@ function init() {
                   document.getElementById("output3").innerHTML = '<pre>真ん中</pre>';
                   if(CrossfadeSample){
                     if(nowType != 2) {
-                      disableKaraoke();
+                      KaraokeClass.disableKaraoke();
                     }
                   }
 
@@ -289,7 +289,7 @@ function init() {
                 document.getElementById("output3").innerHTML = '<pre>なし</pre>';
                 if(CrossfadeSample){
                   if(nowType != 3) {
-                    disableKaraoke();
+                    KaraokeClass.disableKaraoke();
                   }
                 }
 
@@ -340,6 +340,7 @@ function startSong() {
   document.getElementById('start').style.display = 'none';
 //  CrossfadeSample.toggle();
 //  init();
+  KaraokeClass.init();
 }
 
 function delay() {
