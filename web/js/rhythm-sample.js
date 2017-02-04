@@ -14,9 +14,10 @@ RhythmSample.SpeedChange = function() {
   //var x = parseInt(element.value) / parseInt(element.max);
 
   // Use an equal-power crossfading curve:
-
-  for (var i = 0; i < sourceArray.length; i++) {
-    sourceArray[i].source.playbackRate.value = this.bpm/startBpm;
+  if(sourceArray){
+    for (var i = 0; i < sourceArray.length; i++) {
+      sourceArray[i].source.playbackRate.value = this.bpm/startBpm;
+    }
   }
 };
 
