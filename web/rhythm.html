@@ -1,0 +1,41 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Leap Motion JavaScript Sample</title>
+<script src="./js/buffer-loader.js"></script>
+<script src="./js/init.js"></script>
+<script src="./js/rhythm-sample.js"></script>
+<script src="./js/crossfade-sample.js"></script>
+<script>
+window.onload = loadBuffers;
+var context;
+var bufferLoader;
+
+function finishedLoading(bufferList) {
+  // Create two sources and play them both together.
+  var source1 = context.createBufferSource();
+  var source2 = context.createBufferSource();
+  source1.buffer = bufferList[0];
+  source2.buffer = bufferList[1];
+
+  source1.connect(context.destination);
+  source2.connect(context.destination);
+  source1.start(0);
+  source2.start(0);
+}
+</script>
+</head>
+<body onload="">
+<h1>Leap Motion JavaScript Sample</h1>
+<div id="main">
+<input type="button" onclick="RhythmSample.play();" value="Play">
+<input type="button" onclick="RhythmSample.setBPM(60);" value="60">
+<input type="button" onclick="RhythmSample.setBPM(120);" value="120">
+<input type="button" onclick="RhythmSample.setBPM(180);" value="180">
+<input type="button" onclick="CrossfadeSample.toggle();" value="Play/Pause">
+<input type="button" onclick="CrossfadeSample.crossfade(0);" value="type1">
+<input type="button" onclick="CrossfadeSample.crossfade(1);" value="type2">
+<input type="button" onclick="CrossfadeSample.crossfade(2);" value="type3">
+</div>
+</body>
+</html>

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 var RhythmSample = {bpm:0,startTime:0
 };
 
@@ -6,6 +7,14 @@ RhythmSample.setBPM = function(b,startTime) {
   this.startTimer = startTime;
   console.log("setBPM");
 
+=======
+var RhythmSample = {
+  bpm:120
+};
+
+RhythmSample.setBPM = function(b) {
+  this.bpm = b;
+>>>>>>> audiotest
 }
 
 RhythmSample.play = function() {
@@ -23,9 +32,13 @@ RhythmSample.play = function() {
   var hihat = BUFFERS.hihat;
 
   // We'll start playing the rhythm 100 milliseconds from "now"
+<<<<<<< HEAD
 //  var startTime = context.currentTime + 0.100;
   var startTime = this.startTimer;
   console.log(startTime + ":" + this.bpm);
+=======
+  var startTime = context.currentTime + 0.100;
+>>>>>>> audiotest
   var tempo = this.bpm; // BPM (beats per minute)
   var eighthNoteTime = (60 / tempo) / 2;
 
