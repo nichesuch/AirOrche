@@ -15,8 +15,6 @@ PowerGuitar.play = function() {
   var guitar = BUFFERS.guitar;
 
   playSound(guitar, time);
-
-  }
 };
 
 
