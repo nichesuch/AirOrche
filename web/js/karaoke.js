@@ -10,8 +10,8 @@
         demoAudio = document.getElementById('demo-audio');
 
     // file select
-    fileselect.addEventListener('change', fileSelectHandler, false);
-
+    //fileselect.addEventListener('change', fileSelectHandler, false);
+/*
     var xhr = new XMLHttpRequest();
     if (xhr.upload) {
       // file drop
@@ -22,24 +22,14 @@
     } else {
       filedrag.style.display = 'none';
     }
-
+*/
     var karaokeEnabled = true;
-
-    disableFilter.addEventListener('click', function() {
-      if (karaokeEnabled) {
-        disableKaraoke();
-        karaokeEnabled = false;
-        disableFilter.innerHTML = 'Enable karaoke';
-      } else {
-        enableKaraoke();
-        karaokeEnabled = true;
-        disableFilter.innerHTML = 'Disable karaoke';
-      }
-    });
-
+/*
     demoAudio.addEventListener('click', function() {
       playSound('audio/sing_donguri.m4a')
     }, false);
+    */
+    playSound('audio/sing_donguri.m4a');
   }
 
   // plays a file
