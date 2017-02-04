@@ -38,7 +38,7 @@ PowerGuitar.play = function() {
 
 
 PowerGuitar.setPower = function(num) {
-  var x = num/5;
+  var x = num/10;
   //var x = parseInt(element.value) / parseInt(element.max);
 
   // Use an equal-power crossfading curve:
