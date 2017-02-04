@@ -16,7 +16,7 @@ var BUFFERS_TO_LOAD = {
   crowd: 'sound/clapping-crowd.wav',
   drums: 'sound/blueyellow.wav',
   organ: 'sound/organ-echo-chords.wav',
-  hey: 'sound/hey.m4a',
+  hey: 'sound/hai.m4a',
   techno: 'sound/techno.wav'
 };
 
