@@ -5,19 +5,7 @@ var context = null;
 
 // An object to track the buffers to load {name: path}
 var BUFFERS_TO_LOAD = {
-  type1: 'sound/sing_dongri.m4a',
-  type2: 'sound/hihat.wav',
-  type3: 'sound/hihat.wav',
-  type4: 'sound/donguri.m4a',
-  kick: 'sound/kick.wav',
-  snare: 'sound/snare.wav',
-  hihat: 'sound/hihat.wav',
-  jam: 'sound/br-jam-loop.wav',
-  crowd: 'sound/clapping-crowd.wav',
-  drums: 'sound/blueyellow.wav',
-  organ: 'sound/organ-echo-chords.wav',
-  hey: 'sound/hai.m4a',
-  techno: 'sound/techno.wav'
+  type1: 'sound/sing_dongri.m4a'
 };
 
 // Loads all sound samples into the buffers object.
