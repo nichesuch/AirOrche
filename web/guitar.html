@@ -114,7 +114,8 @@ function init() {
                   document.getElementById("output3").innerHTML = 'bpm:' + bpm  + '</pre>';
                   console.log(3);
                 }else if(minHeight > height && height > -500) {
-                  heightspeed = minHeight - height;
+                  if(minHeight - height > heightspeed)
+                    heightspeed = minHeight - height;
                   minHeight = height;
                   beforeBeetTime = context.currentTime;
                   //document.getElementById("output").innerHTML = 'bpmTime:' + beforeBeetTime  + '</pre>';

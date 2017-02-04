@@ -29,6 +29,8 @@ PowerGuitar.play = function() {
     sources.source.start(time);
   }
 
+
+
   var guitar = BUFFERS.guitar;
   var time = context.currentTime + 0.100;
   playSound(guitar, time);
@@ -36,7 +38,7 @@ PowerGuitar.play = function() {
 
 
 PowerGuitar.setPower = function(num) {
-  var x = num/20;
+  var x = num/5;
   //var x = parseInt(element.value) / parseInt(element.max);
 
   // Use an equal-power crossfading curve:
