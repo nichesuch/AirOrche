@@ -3,9 +3,7 @@ var CrossfadeSample = {playing:false};
 var sourceArray;
 var firstIndex = 0;
 
-
-
-CrossfadeSample.play = function() {
+CrossfadeSample.init = function() {
   // Create three sources.
   this.ctl1 = createSource(BUFFERS.type1);
   this.ctl2 = createSource(BUFFERS.type2);
@@ -16,7 +14,10 @@ CrossfadeSample.play = function() {
   for (var i = 0; i < sourceArray.length; i++) {
     sourceArray[i].gainNode.gain.value = 0;
   }
-  sourceArray[firstIndex].gainNode.gain.value = 100;
+  sourceArray[firstIndex].gainNode.gain.value = 100;  
+}
+
+CrossfadeSample.play = function() {
   // Start playback in a loop
   if (!sourceArray[firstIndex].source.start) {
     for (var i = 0; i < sourceArray.length; i++) {
