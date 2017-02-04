@@ -196,11 +196,15 @@ KaraokeClass.init = function() {
 };
 
 KaraokeClass.disableKaraoke = function() {
+  if(mix2 && mix){
     mix2.gain.value = 1;
     mix.gain.value = 0;
-  };
+  }
+};
 
 KaraokeClass.enableKaraoke = function() {
+  if(mix2 && mix){
     mix.gain.value = 1;
     mix2.gain.value = 0;
-  };
+  }
+};
