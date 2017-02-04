@@ -52,14 +52,14 @@ CrossfadeSample.init = function() {
 
     var filter = context.createBiquadFilter();
     // Create the audio graph.
-    source.connect(filter);
-    filter.connect(context.destination);
     // Create and specify parameters for the low-pass filter.
     filter.type = 'notch'; // Low-pass filter. See BiquadFilterNode docs
     filter.frequency.value = 600; // Set cutoff to 600 HZ
     filter.Q.value = 20; // Set cutoff to 600 HZ
 
     filter.gain.value = -1000;
+    source.connect(filter);
+    filter.connect(context.destination);
 
     return {
       source: source,
