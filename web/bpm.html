@@ -100,7 +100,7 @@ function init() {
                   diffArraySum -= diffArray[0];
                   diffArray.push(60/diff);
                   diffArray.shift();
-                  bpm = diffArraySum / diffArraySum.length;
+                  bpm = diffArraySum / diffArray.length;
                   RhythmSample.setBPM(bpm,beforeBeetTime);
                   beforeTime = context.currentTime;
                   maxHeight = -999;
