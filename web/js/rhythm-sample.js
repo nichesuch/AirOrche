@@ -8,6 +8,20 @@ RhythmSample.setBPM = function(b,startTime) {
   this.startTimer = startTime;
 };
 
+// Fades between 0 (all source 1) and 1 (all source 2)
+RhythmSample.SpeedChange = function() {
+  var x = 0;
+  //var x = parseInt(element.value) / parseInt(element.max);
+
+  // Use an equal-power crossfading curve:
+
+  for (var i = 0; i < sourceArray.length; i++) {
+    sourceArray[i].source.playbackRate.value = this.bpm/startBpm;
+  }
+};
+
+var startBpm;
+
 RhythmSample.play = function() {
   function playSound(buffer, time) {
     var source = context.createBufferSource();
@@ -26,6 +40,7 @@ RhythmSample.play = function() {
   // We'll start playing the rhythm 100 milliseconds from "now"
 //  var startTime = context.currentTime + 0.100;
   var tempo = this.bpm; // BPM (beats per minute)
+  startBpm = tempo;
   var eighthNoteTime = (60 / tempo) / 2;
   var diff = parseInt((context.currentTime - this.startTimer) / (eighthNoteTime*2));
   var startTime = this.startTimer + ((diff+1)*eighthNoteTime*2)-0.1;

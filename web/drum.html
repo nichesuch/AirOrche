@@ -105,6 +105,7 @@ function init() {
                   if(diffArrayCnt>=10) diffArrayCnt=10;
                   bpm = diffArraySum / diffArrayCnt;
                   RhythmSample.setBPM(bpm,beforeBeetTime);
+                  RhythmSample.SpeedChange();
                   beforeTime = context.currentTime;
                   maxHeight = -999;
                   document.getElementById("output3").innerHTML = 'bpm:' + bpm  + '</pre>';
@@ -182,6 +183,7 @@ function delay() {
   </div>
 
 <input type="button" onclick="RhythmSample.play();" value="Play">
+<input type="button" onclick="CrossfadeSample.SpeedChange();" value="speed">
 <input type="button" onclick="CrossfadeSample.toggle();" value="Play/Pause">
 <input type="button" onclick="CrossfadeSample.crossfade(0);" value="type1">
 <input type="button" onclick="CrossfadeSample.crossfade(1);" value="type2">
