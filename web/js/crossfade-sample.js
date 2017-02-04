@@ -1,7 +1,12 @@
-var CrossfadeSample = {playing:false};
+var CrossfadeSample = {playing:false,
+bpm:-1};
 
 var sourceArray;
 var firstIndex = 0;
+
+CrossfadeSample.setBPM(b) {
+  this.bpm = b;
+}
 
 CrossfadeSample.init = function() {
   // Create three sources.
@@ -74,6 +79,18 @@ CrossfadeSample.crossfade = function(num) {
     sourceArray[i].gainNode.gain.value = gain2;
   }
   sourceArray[num].gainNode.gain.value = gain1;
+};
+
+// Fades between 0 (all source 1) and 1 (all source 2)
+CrossfadeSample.SpeedChange = function() {
+  var x = 0;
+  //var x = parseInt(element.value) / parseInt(element.max);
+
+  // Use an equal-power crossfading curve:
+
+  for (var i = 0; i < sourceArray.length; i++) {
+    sourceArray[i].playbackRate.value = this.bpm;
+  }
 };
 
 CrossfadeSample.toggle = function() {
