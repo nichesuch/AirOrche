@@ -4,10 +4,26 @@ var PowerGuitar = {
 var sources;
 
 PowerGuitar.play = function() {
+  function createSource(buffer) {
+    var source = context.createBufferSource();
+    var gainNode = context.createGain ? context.createGain() : context.createGainNode();
+    source.buffer = buffer;
+    // Turn on looping
+    source.loop = true;
+    // Connect source to gain.
+    source.connect(gainNode);
+    // Connect gain to destination.
+    gainNode.connect(context.destination);
+
+    return {
+      source: source,
+      gainNode: gainNode
+    };
+  }
   function playSound(buffer, time) {
-    sources = context.createBufferSource();
-    sources.buffer = buffer;
-    sources.connect(context.destination);
+
+    sources = context.createSource(buffer);
+//    sources.connect(context.destination);
     if (!sources.start)
       sources.start = sources.noteOn;
     sources.start(time);
