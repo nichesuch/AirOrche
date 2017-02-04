@@ -31,6 +31,8 @@ var pauseOnGesture = false;
 var focusListener;
 var blurListener;
 
+var nowType = -1;
+
 // Support both the WebSocket and MozWebSocket objects
 if ((typeof(WebSocket) == 'undefined') &&
     (typeof(MozWebSocket) != 'undefined')) {
@@ -82,27 +84,35 @@ function init() {
                 if(direction < -70) {
                   document.getElementById("output3").innerHTML = '<pre>左</pre>';
                   if(CrossfadeSample){
-                    CrossfadeSample.crossfade(0);
+                    if(nowType != 0) {
+                      CrossfadeSample.crossfade(0);
+                    }
                   }
                 //右
               }else if(direction > 70){
                   document.getElementById("output3").innerHTML = '<pre>右</pre>';
                   if(CrossfadeSample){
-                    CrossfadeSample.crossfade(1);
+                    if(nowType != 1) {
+                      CrossfadeSample.crossfade(1);
+                    }
                   }
 
                 //真ん中
                 }else{
                   document.getElementById("output3").innerHTML = '<pre>真ん中</pre>';
                   if(CrossfadeSample){
-                    CrossfadeSample.crossfade(2);
+                    if(nowType != 2) {
+                      CrossfadeSample.crossfade(2);
+                    }
                   }
 
                 }
               }else{
                 document.getElementById("output3").innerHTML = '<pre>なし</pre>';
                 if(CrossfadeSample){
-                  CrossfadeSample.crossfade(3);
+                  if(nowType != 3) {
+                    CrossfadeSample.crossfade(3);
+                  }
                 }
 
               }
