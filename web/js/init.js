@@ -5,10 +5,10 @@ var context = null;
 
 // An object to track the buffers to load {name: path}
 var BUFFERS_TO_LOAD = {
-  type1: 'sound/sing_heavy.mp3',
-  type2: 'sound/hana.mp3',
-  type3: 'sound/hana.mp3',
-  type4: 'sound/karaoke_heavy.mp3',
+  type1: 'sound/sing.wav',
+  type2: 'sound/sing.wav',
+  type3: 'sound/sing.wav',
+  type4: 'sound/karaoke.wav',
   kick: 'sound/kick.wav',
   snare: 'sound/snare.wav',
   hihat: 'sound/hihat.wav',
