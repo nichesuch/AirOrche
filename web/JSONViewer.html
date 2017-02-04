@@ -62,13 +62,13 @@ function init() {
               direction = parseInt(obj.t[0]);
               depth = parseInt(obj.t[2]);
 
-              if(depth < 0) {
+              if(depth < -50) {
                 //左
-                if(direction < -50) {
+                if(direction < -70) {
                   document.getElementById("output3").innerHTML = '<pre>左</pre>';
 
                 //右
-                }else if(direction > 50){
+              }else if(direction > 70){
                   document.getElementById("output3").innerHTML = '<pre>右</pre>';
 
                 //真ん中
