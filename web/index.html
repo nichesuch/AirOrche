@@ -158,8 +158,8 @@ function pauseForGestures() {
 }
 
 function delay() {
-  CrossfadeSample.init();
   setTimeout(function(){
+    CrossfadeSample.init();
     CrossfadeSample.play();
     init();
   },5000);
