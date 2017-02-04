@@ -369,7 +369,39 @@ function delay() {
     init();
       KaraokeClass.init();
   },3000);
+
+
 }
+
+var karaokeing = false;
+
+document.onkeydown = function(e) {
+    var keyCode = false;
+
+    if (e) {
+        event = e;
+    }
+
+    if (event) {
+        if (event.keyCode) {
+            keyCode = event.keyCode;
+        } else if (event.which) {
+            keyCode = event.which;
+        }
+    }
+    if(keyCode == 90) {
+      startSong();
+    }else if(keyCode == 32){
+      if(karaokeing) {
+        KaraokeClass.disableKaraoke();
+        karaokeing = false;
+      }else{
+        KaraokeClass.enableKaraoke();
+        karaokeing = true;
+      }
+    }
+    //alert(keyCode);
+};
 
 </script>
 </head>
