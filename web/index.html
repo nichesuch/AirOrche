@@ -147,6 +147,19 @@
       vertical-align: top;
       color: #333;
     }
+    #filedrag {
+      display: none;
+      font-weight: bold;
+      text-align: center;
+      padding: 2em;
+      margin: 1em 0;
+      color: #555;
+      border-radius: 7px;
+      cursor: default;
+      background-color: #ecf0f1;
+      font-size: 2em;
+      border: 10px dotted #1abc9c;
+    }
 
 
   </style>
@@ -341,13 +354,19 @@ function startSong() {
   document.getElementById('start').style.display = 'none';
 //  CrossfadeSample.toggle();
 //  init();
-  KaraokeClass.init();
+    if(!audioFile) {
+        KaraokeClass.playSound('sound/sing_donguri.m4a');
+    } else {
+        KaraokeClass.initAudio(audioFile);
+    }
+
 }
 
 function delay() {
   setTimeout(function(){
 //    CrossfadeSample.init();
     init();
+      KaraokeClass.init();
   },3000);
 }
 
@@ -410,6 +429,10 @@ function delay() {
 
       </ul>
     </div>
+  </section>
+  <section id="file_select">
+    <div id="filedrag" style="display: block;">音楽ファイルをドラッグ＆ドロップ</div>
+    <input type="file" id="fileselect" name="fileselect[]">
   </section>
 
 </article>
