@@ -13,7 +13,7 @@ PowerGuitar.play = function() {
   }
 
   var guitar = BUFFERS.guitar;
-
+  var time = context.currentTime + 0.100;
   playSound(guitar, time);
 };
 
@@ -24,6 +24,7 @@ PowerGuitar.setPower = function(num) {
 
   // Use an equal-power crossfading curve:
   var gain1 = Math.cos(x * 0.5*Math.PI);
-
-  this.source.gainNode.gain.value = gain1;
+  if(this.source) {
+    this.source.gainNode.gain.value = gain1;
+  }
 };
