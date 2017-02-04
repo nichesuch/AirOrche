@@ -264,7 +264,7 @@ function init() {
                   if(CrossfadeSample){
                     if(nowType != 0) {
                       //CrossfadeSample.crossfade(0);
-                      KaraokeClass.enableKaraoke();
+                      KaraokeClass.disableKaraoke();
                     }
                   }
                 //右
@@ -290,7 +290,7 @@ function init() {
                 document.getElementById("output3").innerHTML = '<pre>なし</pre>';
                 if(CrossfadeSample){
                   if(nowType != 3) {
-                    KaraokeClass.disableKaraoke();
+                    KaraokeClass.enableKaraoke();
                   }
                 }
 
