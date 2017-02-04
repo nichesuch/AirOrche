@@ -22,7 +22,7 @@ PowerGuitar.play = function() {
   }
   function playSound(buffer, time) {
 
-    sources = context.createSource(buffer);
+    sources = createSource(buffer);
 //    sources.connect(context.destination);
     if (!sources.start)
       sources.start = sources.noteOn;
