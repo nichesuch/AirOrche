@@ -30,7 +30,7 @@ PowerGuitar.play = function() {
     sources.source.start(time);
     base_vol = 1;
     setInterval(function(){
-      base_vol = base_vol * 0.99;
+      PowerGuitar.fadeout(0.99);
     },10);
   }
 
@@ -39,6 +39,10 @@ PowerGuitar.play = function() {
   var guitar = BUFFERS.guitar;
   var time = context.currentTime + 0.100;
   playSound(guitar, time);
+};
+
+PowerGuitar.fadeout = function(num) {
+  sources.gainNode.gain.value = sources.gainNode.gain.value * num;
 };
 
 
