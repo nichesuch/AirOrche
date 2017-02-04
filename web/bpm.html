@@ -95,7 +95,7 @@ function init() {
                 if(minHeight+resetRange < height){
                   upFlg = true;
                   diff = context.currentTime - beforeTime;
-                  bpm = 1000000*60/diff;
+                  bpm = 60/diff;
                   RhythmSample.setBPM(bpm,beforeBeetTime);
                   beforeTime = context.currentTime;
                   maxHeight = -999;
