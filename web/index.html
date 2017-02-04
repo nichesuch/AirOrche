@@ -148,9 +148,15 @@ function pauseForGestures() {
   }
 }
 
+funciton delay() {
+  setTimeout(function(){
+    init();
+  },5000);
+}
+
 </script>
 </head>
-<body onload="init();">
+<body onload="delay();">
 <h1>Leap Motion JavaScript Sample</h1>
 <div id="main">
   <button id="pause" onclick="togglePause()">Pause</button>
