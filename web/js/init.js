@@ -8,7 +8,7 @@ var BUFFERS_TO_LOAD = {
   type1: 'sound/karaoke_heavy.mp3',
   type2: 'sound/hana.mp3',
   type3: 'sound/hana.mp3',
-  type4: 'sound/karaoke_heavy.wav',
+  type4: 'sound/karaoke_heavy.mp3',
   kick: 'sound/kick.wav',
   snare: 'sound/snare.wav',
   hihat: 'sound/hihat.wav',
