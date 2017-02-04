@@ -98,7 +98,7 @@ function init() {
                   bpm = 1000000*60/diff;
                   RhythmSample.setBPM(bpm,beforeBeetTime);
                   beforeTime = obj.timestamp;
-                  maxHeight = -1;
+                  maxHeight = -999;
                   document.getElementById("output3").innerHTML = 'bpm:' + bpm  + '</pre>';
                   console.log(3);
                 }else if(minHeight > height) {
