@@ -5,14 +5,14 @@ var context = null;
 
 // An object to track the buffers to load {name: path}
 var BUFFERS_TO_LOAD = {
-  kick: 'sounds/kick.wav',
-  snare: 'sounds/snare.wav',
-  hihat: 'sounds/hihat.wav',
-  jam: 'sounds/br-jam-loop.wav',
-  crowd: 'sounds/clapping-crowd.wav',
-  drums: 'sounds/blueyellow.wav',
-  organ: 'sounds/organ-echo-chords.wav',
-  techno: 'sounds/techno.wav'
+  kick: 'sound/kick.wav',
+  snare: 'sound/snare.wav',
+  hihat: 'sound/hihat.wav',
+  jam: 'sound/br-jam-loop.wav',
+  crowd: 'sound/clapping-crowd.wav',
+  drums: 'sound/blueyellow.wav',
+  organ: 'sound/organ-echo-chords.wav',
+  techno: 'sound/techno.wav'
 };
 
 // Loads all sound samples into the buffers object.
