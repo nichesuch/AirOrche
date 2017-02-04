@@ -119,6 +119,7 @@ KaraokeClass.init = function() {
     if (context.decodeAudioData) {
       context.decodeAudioData(data, function (buffer) {
         source.buffer = buffer;
+        source.loop = true;
         createAudio();
       }, function (e) {
         console.error(e);
