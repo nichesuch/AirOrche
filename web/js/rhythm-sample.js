@@ -34,7 +34,7 @@ RhythmSample.play = function() {
     var time = startTime + bar * 8 * eighthNoteTime;
     // Play the bass (kick) drum on beats 1, 5
     playSound(hey, time);
-    playSound(hey, time + 1 * eighthNoteTime);
+    playSound(hey, time + 2 * eighthNoteTime);
 
   }
 };
