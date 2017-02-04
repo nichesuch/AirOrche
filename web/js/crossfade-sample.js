@@ -6,8 +6,8 @@ var firstIndex = 0;
 CrossfadeSample.init = function() {
   // Create three sources.
   this.ctl1 = createSource(BUFFERS.type1);
-  this.ctl2 = createSource(BUFFERS.type2);
-  this.ctl3 = createSource(BUFFERS.type3);
+  this.ctl2 = createSource(BUFFERS.type1);
+  this.ctl3 = createSource(BUFFERS.type1);
   this.ctl4 = createSource(BUFFERS.type4);
   sourceArray = [this.ctl1,this.ctl2,this.ctl3,this.ctl4];
   // Mute the second source.
