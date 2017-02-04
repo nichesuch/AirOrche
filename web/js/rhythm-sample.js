@@ -26,7 +26,7 @@ RhythmSample.play = function() {
 //  var startTime = context.currentTime + 0.100;
   var tempo = this.bpm; // BPM (beats per minute)
   var eighthNoteTime = (60 / tempo) / 2;
-  var startTime = this.startTimer + ((60 / tempo)*2);
+  var startTime = this.startTimer + ((60 / tempo));
 
   // Play 2 bars of the following:
   for (var bar = 0; bar < 2; bar++) {
