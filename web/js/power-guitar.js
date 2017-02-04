@@ -2,6 +2,7 @@ var PowerGuitar = {
 };
 
 var sources;
+var base_vol = 1;
 
 PowerGuitar.play = function() {
   function createSource(buffer) {
@@ -27,6 +28,10 @@ PowerGuitar.play = function() {
       sources.source.start = sources.source.noteOn;
 
     sources.source.start(time);
+    base_vol = 1;
+    setInterval(function(){
+      base_vol = base_vol * 0.99;
+    },10);
   }
 
 
@@ -42,7 +47,7 @@ PowerGuitar.setPower = function(num) {
   //var x = parseInt(element.value) / parseInt(element.max);
 
   // Use an equal-power crossfading curve:
-  var gain1 = x; //Math.cos(x * 0.5*Math.PI);
+  var gain1 = x*base_vol; //Math.cos(x * 0.5*Math.PI);
   console.log("gain:"+gain1);
   if(sources) {
     sources.gainNode.gain.value = gain1;
