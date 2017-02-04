@@ -1,0 +1,191 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Leap Motion JavaScript Sample</title>
+<script src="./js/buffer-loader.js"></script>
+<script src="./js/init.js"></script>
+<script src="./js/rhythm-sample.js"></script>
+<script>
+window.onload = loadBuffers;
+var context;
+var bufferLoader;
+
+function finishedLoading(bufferList) {
+  // Create two sources and play them both together.
+  var source1 = context.createBufferSource();
+  var source2 = context.createBufferSource();
+  source1.buffer = bufferList[0];
+  source2.buffer = bufferList[1];
+
+  source1.connect(context.destination);
+  source2.connect(context.destination);
+  source1.start(0);
+  source2.start(0);
+}
+</script>
+
+<script>
+var ws;
+var paused = false;
+var pauseOnGesture = false;
+var focusListener;
+var blurListener;
+
+var nowType = -1;
+
+var minHeight = 999;
+var maxHeight = -999;
+var resetRange = 40;
+var beforeTime = -1;
+var upFlg = false;
+
+var beforeBeetTime = -1;
+
+var bpm = 0;
+var diffArray = [0,0,0,0,0,0,0,0,0,0];
+var diffArraySum = 0;
+var diffArrayCnt = 0;
+
+// Support both the WebSocket and MozWebSocket objects
+if ((typeof(WebSocket) == 'undefined') &&
+    (typeof(MozWebSocket) != 'undefined')) {
+    WebSocket = MozWebSocket;
+}
+
+// Create the socket with event handlers
+function init() {
+    // Create and open the socket
+    ws = new WebSocket("ws://localhost:6437/v6.json");
+
+    // On successful connection
+    ws.onopen = function(event) {
+        var enableMessage = JSON.stringify({enableGestures: true});
+        ws.send(enableMessage); // Enable gestures
+        ws.send(JSON.stringify({focused: true})); // claim focus
+
+        focusListener = window.addEventListener('focus', function(e) {
+                               ws.send(JSON.stringify({focused: true})); // claim focus
+                         });
+
+        blurListener = window.addEventListener('blur', function(e) {
+                               ws.send(JSON.stringify({focused: false})); // relinquish focus
+                         });
+
+        document.getElementById("main").style.visibility = "visible";
+        document.getElementById("connection").innerHTML = "WebSocket connection open!";
+    };
+
+    // On message received
+    ws.onmessage = function(event) {
+        if (!paused) {
+            var obj = JSON.parse(event.data);
+
+            if(obj.t) {
+              height = parseInt(obj.t[1]);
+              document.getElementById("output4").innerHTML = '高さ:' + height  + '</pre>';
+              document.getElementById("output2").innerHTML = '最低高さ:' + minHeight  + '</pre>';
+              if(upFlg) {
+                if(maxHeight-resetRange > height){
+                  upFlg = false;
+                  minHeight = 999;
+                  console.log(1);
+                } else if(maxHeight < height) {
+                  maxHeight = height;
+                  console.log(2);
+                }
+              }else{
+                if(minHeight+resetRange < height){
+                  upFlg = true;
+                  diff = context.currentTime - beforeTime;
+                  diffArraySum += 60/diff;
+                  diffArraySum -= diffArray[0];
+                  diffArray.push(60/diff);
+                  diffArray.shift();
+                  diffArrayCnt++;
+                  if(diffArrayCnt>=10) diffArrayCnt=10;
+                  bpm = diffArraySum / diffArrayCnt;
+                  RhythmSample.setBPM(bpm,beforeBeetTime);
+                  beforeTime = context.currentTime;
+                  maxHeight = -999;
+                  document.getElementById("output3").innerHTML = 'bpm:' + bpm  + '</pre>';
+                  console.log(3);
+                }else if(minHeight > height) {
+                  minHeight = height;
+                  beforeBeetTime = context.currentTime;
+                  document.getElementById("output").innerHTML = 'bpmTime:' + beforeBeetTime  + '</pre>';
+                  console.log(4);
+                }
+              }
+            }
+
+            if (pauseOnGesture && obj.gestures.length > 0) {
+                togglePause();
+            }
+        }
+    };
+
+    // On socket close
+    ws.onclose = function(event) {
+        ws = null;
+        window.removeListener("focus", focusListener);
+        window.removeListener("blur", blurListener);
+        document.getElementById("main").style.visibility = "hidden";
+        document.getElementById("connection").innerHTML = "WebSocket connection closed";
+    }
+
+    // On socket error
+    ws.onerror = function(event) {
+      alert("Received error");
+    };
+}
+
+function togglePause() {
+  paused = !paused;
+
+  if (paused) {
+    document.getElementById("pause").innerText = "Resume";
+  } else {
+    document.getElementById("pause").innerText = "Pause";
+  }
+}
+
+function pauseForGestures() {
+  if (document.getElementById("pauseOnGesture").checked) {
+    pauseOnGesture = true;
+  } else {
+    pauseOnGesture = false;
+  }
+}
+
+function delay() {
+  setTimeout(function(){
+    init();
+  },100);
+}
+
+</script>
+</head>
+<body onload="delay();">
+<h1>Leap Motion JavaScript Sample</h1>
+<div id="main">
+  <button id="pause" onclick="togglePause()">Pause</button>
+  <input type="checkbox" id="pauseOnGesture" onclick="pauseForGestures()">Pause on gesture</input>
+  <div id="connection">WebSocket not connected</div>
+  <div id="main" style="">
+  t
+    <div id="output4">output4</div>
+  <br/>
+    <div id="output3">output3</div>
+    <div id="output2">output2</div>
+    <h3>JSON Frame data:</h3>
+    <div id="output"></div>
+  </div>
+
+<input type="button" onclick="RhythmSample.play();" value="Play">
+<input type="button" onclick="CrossfadeSample.toggle();" value="Play/Pause">
+<input type="button" onclick="CrossfadeSample.crossfade(0);" value="type1">
+<input type="button" onclick="CrossfadeSample.crossfade(1);" value="type2">
+<input type="button" onclick="CrossfadeSample.crossfade(2);" value="type3">
+</div>
+</body>
+</html>

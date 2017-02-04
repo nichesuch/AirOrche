@@ -31,11 +31,19 @@ RhythmSample.play = function() {
   var startTime = this.startTimer + ((diff+1)*eighthNoteTime*2)-0.1;
   console.log(diff+ ":" + context.currentTime + ":" + startTime);
   // Play 2 bars of the following:
-  for (var bar = 0; bar < 1; bar++) {
+  for (var bar = 0; bar < 100; bar++) {
     var time = startTime + bar * 8 * eighthNoteTime;
     // Play the bass (kick) drum on beats 1, 5
-    playSound(hey, time);
-    playSound(hey, time + 2 * eighthNoteTime);
+    playSound(kick, time);
+    playSound(kick, time + 4 * eighthNoteTime);
 
+    // Play the snare drum on beats 3, 7
+    playSound(snare, time + 2 * eighthNoteTime);
+    playSound(snare, time + 6 * eighthNoteTime);
+
+    // Play the hi-hat every eighthh note.
+    for (var i = 0; i < 8; ++i) {
+      playSound(hihat, time + i * eighthNoteTime);
+    }
   }
 };
