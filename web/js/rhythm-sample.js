@@ -29,7 +29,7 @@ RhythmSample.play = function() {
   var eighthNoteTime = (60 / tempo) / 2;
   var diff = parseInt((context.currentTime - this.startTimer) / (eighthNoteTime*2));
   var startTime = this.startTimer + (diff*eighthNoteTime*2);
-
+  console.log(diff+ ":" + context.currentTime + ":" + startTime);
   // Play 2 bars of the following:
   for (var bar = 0; bar < 1; bar++) {
     var time = startTime + bar * 8 * eighthNoteTime;
