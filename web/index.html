@@ -54,6 +54,7 @@ window.onload =function() {
 		this.style.display = 'none';
 		e.stopPropagation();
 		e.preventDefault();
+    delay();
 		return false;
 	});
 	loadBuffers();
@@ -254,7 +255,7 @@ function delay() {
     <h3>JSON Frame data:</h3>
     <div id="output"></div>
   </div>
-<input type="button" onclick="delay();" value="INIT">
+<input type="button" onclick="" value="INIT">
 <input type="button" onclick="RhythmSample.play();" value="Play">
 <input type="button" onclick="CrossfadeSample.setBPM(0.75);" value="60">
 <input type="button" onclick="CrossfadeSample.setBPM(1);" value="120">
