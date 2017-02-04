@@ -24,10 +24,135 @@ function finishedLoading(bufferList) {
   source2.start(0);
 }
 </script>
+<script>
+var ws;
+var paused = false;
+var pauseOnGesture = false;
+var focusListener;
+var blurListener;
+
+// Support both the WebSocket and MozWebSocket objects
+if ((typeof(WebSocket) == 'undefined') &&
+    (typeof(MozWebSocket) != 'undefined')) {
+    WebSocket = MozWebSocket;
+}
+
+// Create the socket with event handlers
+function init() {
+    // Create and open the socket
+    ws = new WebSocket("ws://localhost:6437/v6.json");
+
+    // On successful connection
+    ws.onopen = function(event) {
+        var enableMessage = JSON.stringify({enableGestures: true});
+        ws.send(enableMessage); // Enable gestures
+        ws.send(JSON.stringify({focused: true})); // claim focus
+
+        focusListener = window.addEventListener('focus', function(e) {
+                               ws.send(JSON.stringify({focused: true})); // claim focus
+                         });
+
+        blurListener = window.addEventListener('blur', function(e) {
+                               ws.send(JSON.stringify({focused: false})); // relinquish focus
+                         });
+
+        document.getElementById("main").style.visibility = "visible";
+        document.getElementById("connection").innerHTML = "WebSocket connection open!";
+    };
+
+    // On message received
+    ws.onmessage = function(event) {
+        if (!paused) {
+            var obj = JSON.parse(event.data);
+
+            if(obj.hands && obj.hands[0] && obj.hands[0].direction[0]) {
+              document.getElementById("output2").innerHTML = '<pre>' + parseInt(obj.hands[0].direction[0]*10) + '</pre>';
+            }
+            if(obj.pointables && obj.pointables[0] && obj.pointables[0].touchDistance) {
+              document.getElementById("output3").innerHTML = '<pre>' + parseInt(obj.pointables[0].touchDistance*10) + '</pre>';
+            }
+            if(obj.t) {
+              document.getElementById("output4").innerHTML = '向き:' + parseInt(obj.t[0])+"<br> 奥行き: "+parseInt(obj.t[2]) + '</pre>';
+
+              direction = parseInt(obj.t[0]);
+              depth = parseInt(obj.t[2]);
+
+              if(depth < -50) {
+                //左
+                if(direction < -70) {
+                  document.getElementById("output3").innerHTML = '<pre>左</pre>';
+
+                //右
+              }else if(direction > 70){
+                  document.getElementById("output3").innerHTML = '<pre>右</pre>';
+
+                //真ん中
+                }else{
+                  document.getElementById("output3").innerHTML = '<pre>真ん中</pre>';
+
+                }
+              }else{
+                document.getElementById("output3").innerHTML = '<pre>なし</pre>';
+              }
+            }
+
+
+            if (pauseOnGesture && obj.gestures.length > 0) {
+                togglePause();
+            }
+        }
+    };
+
+    // On socket close
+    ws.onclose = function(event) {
+        ws = null;
+        window.removeListener("focus", focusListener);
+        window.removeListener("blur", blurListener);
+        document.getElementById("main").style.visibility = "hidden";
+        document.getElementById("connection").innerHTML = "WebSocket connection closed";
+    }
+
+    // On socket error
+    ws.onerror = function(event) {
+      alert("Received error");
+    };
+}
+
+function togglePause() {
+  paused = !paused;
+
+  if (paused) {
+    document.getElementById("pause").innerText = "Resume";
+  } else {
+    document.getElementById("pause").innerText = "Pause";
+  }
+}
+
+function pauseForGestures() {
+  if (document.getElementById("pauseOnGesture").checked) {
+    pauseOnGesture = true;
+  } else {
+    pauseOnGesture = false;
+  }
+}
+</script>
 </head>
-<body onload="">
+<body onload="init();">
 <h1>Leap Motion JavaScript Sample</h1>
 <div id="main">
+  <button id="pause" onclick="togglePause()">Pause</button>
+  <input type="checkbox" id="pauseOnGesture" onclick="pauseForGestures()">Pause on gesture</input>
+  <div id="connection">WebSocket not connected</div>
+  <div id="main" style="visibility:hidden">
+  t
+    <div id="output4">output4</div>
+  <br/>
+    <div id="output3">output3</div>
+    <div id="output2">output2</div>
+    <h3>JSON Frame data:</h3>
+    <div id="output"></div>
+  </div>
+
 <input type="button" onclick="RhythmSample.play();" value="Play">
 <input type="button" onclick="CrossfadeSample.toggle();" value="Play/Pause">
 <input type="button" onclick="CrossfadeSample.crossfade(0);" value="type1">
