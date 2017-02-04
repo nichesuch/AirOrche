@@ -33,7 +33,7 @@ KaraokeClass.init = function() {
     }, false);
     */
     playSound('sound/sing_donguri.m4a');
-  }
+
 
   // plays a file
   function playSound(url) {
