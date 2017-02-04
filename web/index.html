@@ -140,13 +140,11 @@
 <script src="./js/rhythm-sample.js"></script>
 <script src="./js/crossfade-sample.js"></script>
 <script>
+
 window.onload =function() {
 	document.getElementById('start').addEventListener('click', function (e) {
 //    document.getElementById()
-		this.style.display = 'none';
-		e.stopPropagation();
-		e.preventDefault();
-    delay();
+    //delay();
 		return false;
 	});
 	loadBuffers();
@@ -192,6 +190,8 @@ function toTP(x,y,z) {
   }
 }
 
+var playing = false;
+
 // Create the socket with event handlers
 function init() {
     // Create and open the socket
@@ -225,6 +225,10 @@ function init() {
             }
             if(obj.pointables && obj.pointables[0] && obj.pointables[0].touchDistance) {
               document.getElementById("output3").innerHTML = '<pre>' + parseInt(obj.pointables[0].touchDistance*10) + '</pre>';
+              if(!playing) {
+                startSong();
+                playing = true;
+              }
             }
             if(obj.t) {
               document.getElementById("output4").innerHTML = '向き:' + parseInt(obj.t[0])+"<br> 奥行き: "+parseInt(obj.t[2]) + '</pre>';
@@ -316,17 +320,23 @@ function pauseForGestures() {
   }
 }
 
+function startSong() {
+  this.style.display = 'none';
+  e.stopPropagation();
+  e.preventDefault();
+  CrossfadeSample.toggle();
+}
+
 function delay() {
   setTimeout(function(){
     CrossfadeSample.init();
-    CrossfadeSample.toggle();
     init();
-  },100);
+  },3000);
 }
 
 </script>
 </head>
-<body onload="">
+<body onload="delay();">
 <header>
   <div id="logo" class="left">
     合いの手カモン
