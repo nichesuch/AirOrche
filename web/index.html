@@ -167,7 +167,7 @@ function delay() {
 
 </script>
 </head>
-<body onload="delay();">
+<body onload="">
 <h1>Leap Motion JavaScript Sample</h1>
 <div id="main">
   <button id="pause" onclick="togglePause()">Pause</button>
@@ -182,7 +182,7 @@ function delay() {
     <h3>JSON Frame data:</h3>
     <div id="output"></div>
   </div>
-
+<input type="button" onclick="delay();" value="INIT">
 <input type="button" onclick="RhythmSample.play();" value="Play">
 <input type="button" onclick="RhythmSample.setBPM(60);" value="60">
 <input type="button" onclick="RhythmSample.setBPM(120);" value="120">
