@@ -44,6 +44,7 @@ var beforeBeetTime = -1;
 var bpm = 0;
 var diffArray = [0,0,0,0,0,0,0,0,0,0];
 var diffArraySum = 0;
+var diffArrayCnt = 0;
 
 // Support both the WebSocket and MozWebSocket objects
 if ((typeof(WebSocket) == 'undefined') &&
@@ -100,7 +101,9 @@ function init() {
                   diffArraySum -= diffArray[0];
                   diffArray.push(60/diff);
                   diffArray.shift();
-                  bpm = diffArraySum / diffArray.length;
+                  diffArrayCnt++;
+                  if(diffArrayCnt>=10) diffArrayCnt=10;
+                  bpm = diffArraySum / diffArrayCnt;
                   RhythmSample.setBPM(bpm,beforeBeetTime);
                   beforeTime = context.currentTime;
                   maxHeight = -999;
