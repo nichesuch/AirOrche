@@ -16,14 +16,15 @@
       background-color: #f1f1f1;
     }
     header {
-      height: 40px;
+      height: 50px;
       padding: 5px 10px;
-      background-color: hotpink;
+      background-color: white;
       position: fixed;
       z-index: 999999;
       width: 100%;
       top: 0;
       left: 0;
+      border-bottom:  solid 1px #e2e2e2;
     }
     header > * {
       display: inline-block;
@@ -43,13 +44,24 @@
       font-size: 20px;
       padding-left: 10px;
     }
+    #search input {
+      margin-top: 5px;
+      margin-left:30px;
+      padding-left: 10px;
+      height: 30px;
+      width: 300px;
+      border-radius: 2px;
+      background-color: white;
+      border: 1px solid #ccc;
+    }
     #logout {
-      padding-top: 2px;
-      color: white;
+      padding-top: 7px;
+      padding-right: 20px;
+      color: #333;
     }
     article {
       padding: 10px;
-      padding-top: 50px;
+      padding-top: 60px;
       width: 1000px;
       margin: 0 auto;
     }
@@ -340,7 +352,11 @@ function delay() {
 <body onload="delay();">
 <header>
   <div id="logo" class="left">
-    合いの手カモン
+    <img src="./img/ainote_logo.png" alt="" width="180px">
+
+  </div>
+  <div id="search" class="left">
+    <input type="text" placeholder="検索">
   </div>
   <div id="logout" class="right">
     ログアウト
