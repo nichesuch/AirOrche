@@ -36,12 +36,12 @@ PowerGuitar.play = function() {
 
 
 PowerGuitar.setPower = function(num) {
-  var x = (num-20)/20;
+  var x = num/200;
   //var x = parseInt(element.value) / parseInt(element.max);
 
   // Use an equal-power crossfading curve:
   var gain1 = x; //Math.cos(x * 0.5*Math.PI);
-  console.log(gain1);
+  console.log("gain:"+gain1);
   if(sources) {
     sources.gainNode.gain.value = gain1;
   }
