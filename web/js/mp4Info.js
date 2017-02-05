@@ -7,7 +7,8 @@ Mp4InfoClass.info = function(data) {
    // Uploaded.
  };
 
- var blob = new Blob(['1234'], {type: 'text/plain'});
+// var blob = new Blob(['1234'], {type: 'text/plain'});
+ var blob = new Blob([data], { type: "audio/aac" });
 
  oReq.send(blob);
 
