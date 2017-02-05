@@ -1,6 +1,7 @@
 <?php
 
 echo $_POST;
+error_log(var_dump($_POST,true));
 exit;
 
 $dir = $_POST["dir"];
