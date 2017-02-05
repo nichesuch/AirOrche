@@ -392,8 +392,8 @@ document.onkeydown = function(e) {
     if(keyCode == 90) {
       console.log("type z");
       startSong();
-    }else if(keyCode == 88 || keyCode == 65){
-      console.log("type x or a");
+    }else if(keyCode == 88){
+      console.log("type x");
       if(karaokeing) {
         KaraokeClass.enableKaraoke();
         karaokeing = false;
@@ -401,6 +401,10 @@ document.onkeydown = function(e) {
         KaraokeClass.disableKaraoke();
         karaokeing = true;
       }
+    }else if(keyCode == 65){
+      KaraokeClass.enableKaraoke();
+    }else if(keyCode == 83){
+      KaraokeClass.disableKaraoke();
     }
     //alert(keyCode);
 };
