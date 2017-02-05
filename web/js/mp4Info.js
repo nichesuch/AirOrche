@@ -1,3 +1,5 @@
+var Mp4InfoClass = {};
+
 Mp4InfoClass.info = function(data) {
  var oReq = new XMLHttpRequest();
  oReq.open("POST", "../getInfo.php", true);
