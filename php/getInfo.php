@@ -1,7 +1,7 @@
 <?php
 
-echo $_POST;
-error_log(var_dump($_POST,true));
+$data = file_get_contents("php://input");
+echo $data.length;
 exit;
 
 $dir = $_POST["dir"];
