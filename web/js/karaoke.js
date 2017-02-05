@@ -212,14 +212,14 @@ KaraokeClass.initAudio = function(data) {
 
 KaraokeClass.disableKaraoke = function() {
   if(mix2 && mix){
-    mix2.gain.value = 1.2;
+    mix2.gain.value = 1;
     mix.gain.value = 0;
   }
 };
 
 KaraokeClass.enableKaraoke = function() {
   if(mix2 && mix){
-    mix.gain.value = 1;
+    mix.gain.value = 1.5;
     mix2.gain.value = 0;
   }
 };
