@@ -219,7 +219,7 @@ KaraokeClass.disableKaraoke = function() {
 
 KaraokeClass.enableKaraoke = function() {
   if(mix2 && mix){
-    mix.gain.value = 1;
+    mix.gain.value = 1.2;
     mix2.gain.value = 0;
   }
 };
