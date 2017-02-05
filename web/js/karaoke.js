@@ -53,11 +53,11 @@ KaraokeClass.init = function() {
         reader.onload = function(fileEvent) {
             var data = fileEvent.target.result;
             audioFile = data;
-
+/*
             if(Mp4InfoClass) {
-              Mp4InfoClass.info(data);              
+              Mp4InfoClass.info(data);
             }
-
+*/
             document.getElementById('filedrag').innerHTML = 'OK';
 
             // var currentSong = document.getElementById('current-song');
