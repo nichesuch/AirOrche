@@ -392,8 +392,8 @@ document.onkeydown = function(e) {
     if(keyCode == 90) {
       console.log("type z");
       startSong();
-    }else if(keyCode == 88){
-      console.log("type x");
+    }else if(keyCode == 88 || keyCode == 65){
+      console.log("type x or a");
       if(karaokeing) {
         KaraokeClass.enableKaraoke();
         karaokeing = false;
