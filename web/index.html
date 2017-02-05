@@ -63,7 +63,7 @@
     article {
       padding: 10px;
       padding-top: 60px;
-      width: 1000px;
+      width: 1100px;
       margin: 0 auto;
     }
     article > #content {
@@ -129,6 +129,7 @@
       margin: 5px 0;
       border-radius: 2px;
       box-shadow: 0 1px 1px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.08);
+      overflow: hidden;
     }
     #play_list ul li:first-child {
        margin-top: 0;
@@ -138,15 +139,21 @@
     }
     #play_list ul li .image {
       width: 130px;
+      height: 90px;
+      overflow: hidden;
     }
     #play_list ul li img {
       width: 100%;
     }
     #play_list ul li .title {
-      width: 100px;
+      width: 200px;
       height: 100%;
       vertical-align: top;
       color: #333;
+    }
+    #play_list ul li .artist {
+      font-size: 0.8em;
+      color: #777;
     }
     #filedrag {
       display: none;
@@ -434,36 +441,67 @@ document.onkeydown = function(e) {
     <div id="play_list">
       <ul>
         <li>
-          <div class="image"><img src="./img/kuma.jpg" alt=""></div>
-          <div class="title">森のくまさん</div>
+          <div class="image"><img src="./img/photo1.jpg" alt=""></div>
+          <div class="title">
+            <p>ヘビーローテーション</p>
+            <p class="artist">AKB48</p>
+          </div>
+        </li>
+        <li>
+          <div class="image"><img src="./img/photo2.jpg" alt=""></div>
+          <div class="title">
+            <p>女々しくて</p>
+            <p class="artist">ゴールデンボンバー</p>
+          </div>
+        </li>
+        <li>
+          <div class="image"><img src="./img/photo3.jpg" alt=""></div>
+          <div class="title">
+            <p>お願い！セニョリータ</p>
+            <p class="artist">オレンジレンジ</p>
+          </div>
+        </li>
+        <li>
+          <div class="image"><img src="./img/photo4.jpg" alt=""></div>
+          <div class="title">
+            <p>ロコローション</p>
+            <p class="artist">オレンジレンジ</p>
+          </div>
+        </li>
+        <li>
+          <div class="image"><img src="./img/photo5.jpg" alt=""></div>
+          <div class="title">
+            <p>YAH YAH YAH</p>
+            <p class="artist">CHAGE and ASKA</p>
+          </div>
         </li>
         <li>
           <div class="image"><img src="./img/kuma.jpg" alt=""></div>
-          <div class="title">森のくまさん</div>
+          <div class="title">
+            <p>2億4千万の瞳 -エキゾチック・ジャパン-</p>
+            <p class="artist">郷ひろみ</p>
+          </div>
         </li>
         <li>
           <div class="image"><img src="./img/kuma.jpg" alt=""></div>
-          <div class="title">森のくまさん</div>
+          <div class="title">
+            <p>お嫁サンバ</p>
+            <p class="artist">郷ひろみ</p>
+          </div>
         </li>
         <li>
           <div class="image"><img src="./img/kuma.jpg" alt=""></div>
-          <div class="title">森のくまさん</div>
+          <div class="title">
+            <p>ゴールドフィンガー</p>
+            <p class="artist">郷ひろみ</p>
+          </div>
         </li>
         <li>
           <div class="image"><img src="./img/kuma.jpg" alt=""></div>
-          <div class="title">森のくまさん</div>
-        </li>
-        <li>
-          <div class="image"><img src="./img/kuma.jpg" alt=""></div>
-          <div class="title">森のくまさん</div>
-        </li>
-        <li>
-          <div class="image"><img src="./img/kuma.jpg" alt=""></div>
-          <div class="title">森のくまさん</div>
-        </li>
-        <li>
-          <div class="image"><img src="./img/kuma.jpg" alt=""></div>
-          <div class="title">森のくまさん</div>
+          <div class="title">
+            <p>森のくまさん</p>
+            <p class="artist"></p>
+          </div>
         </li>
 
       </ul>
