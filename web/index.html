@@ -395,16 +395,16 @@ document.onkeydown = function(e) {
     }else if(keyCode == 88){
       console.log("type x");
       if(karaokeing) {
-        KaraokeClass.enableKaraoke();
+        KaraokeClass.disableKaraoke();
         karaokeing = false;
       }else{
-        KaraokeClass.disableKaraoke();
+        KaraokeClass.enableKaraoke();
         karaokeing = true;
       }
     }else if(keyCode == 65){
-      KaraokeClass.enableKaraoke();
-    }else if(keyCode == 83){
       KaraokeClass.disableKaraoke();
+    }else if(keyCode == 83){
+      KaraokeClass.enableKaraoke();
     }
     //alert(keyCode);
 };
