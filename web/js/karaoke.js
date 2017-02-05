@@ -212,6 +212,8 @@ KaraokeClass.initAudio = function(data) {
 
 KaraokeClass.disableKaraoke = function() {
   if(mix2 && mix){
+      document.getElementById('music').style.background = "url('./img/back_ainote.jpg') no-repeat";
+      document.getElementById('music').style.backgroundSize = "cover";
     mix2.gain.value = 0.8;
     mix.gain.value = 0;
   }
@@ -219,6 +221,8 @@ KaraokeClass.disableKaraoke = function() {
 
 KaraokeClass.enableKaraoke = function() {
   if(mix2 && mix){
+      document.getElementById('music').style.background = "url('./img/back.jpg') no-repeat";
+      document.getElementById('music').style.backgroundSize = "cover";
     mix.gain.value = 1;
     mix2.gain.value = 0;
   }
