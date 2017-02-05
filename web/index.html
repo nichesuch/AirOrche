@@ -173,8 +173,6 @@
   </style>
 <script src="./js/buffer-loader.js"></script>
 <script src="./js/init.js"></script>
-<script src="./js/rhythm-sample.js"></script>
-<script src="./js/crossfade-sample.js"></script>
 <script src="js/karaoke.js"></script>
 <script>
 
@@ -282,7 +280,7 @@ function init() {
                 //左
                 if(direction < -70) {
                   document.getElementById("output3").innerHTML = '<pre>左</pre>';
-                  if(CrossfadeSample){
+                  if(KaraokeClass){
                     if(nowType != 0) {
                       //CrossfadeSample.crossfade(0);
                       KaraokeClass.disableKaraoke();
@@ -291,7 +289,7 @@ function init() {
                 //右
               }else if(direction > 70){
                   document.getElementById("output3").innerHTML = '<pre>右</pre>';
-                  if(CrossfadeSample){
+                  if(KaraokeClass){
                     if(nowType != 1) {
                       KaraokeClass.disableKaraoke();
                     }
@@ -300,7 +298,7 @@ function init() {
                 //真ん中
                 }else{
                   document.getElementById("output3").innerHTML = '<pre>真ん中</pre>';
-                  if(CrossfadeSample){
+                  if(KaraokeClass){
                     if(nowType != 2) {
                       KaraokeClass.disableKaraoke();
                     }
@@ -309,7 +307,7 @@ function init() {
                 }
               }else{
                 document.getElementById("output3").innerHTML = '<pre>なし</pre>';
-                if(CrossfadeSample){
+                if(KaraokeClass){
                   if(nowType != 3) {
                     KaraokeClass.enableKaraoke();
                   }
@@ -533,15 +531,6 @@ document.onkeydown = function(e) {
     <div id="output"></div>
   </div>
 <input type="button" onclick="" value="INIT">
-<input type="button" onclick="RhythmSample.play();" value="Play">
-<input type="button" onclick="CrossfadeSample.setBPM(0.75);" value="60">
-<input type="button" onclick="CrossfadeSample.setBPM(1);" value="120">
-<input type="button" onclick="CrossfadeSample.setBPM(1.25);" value="180">
-<input type="button" onclick="CrossfadeSample.SpeedChange();" value="speed">
-<input type="button" onclick="CrossfadeSample.toggle();" value="Play/Pause">
-<input type="button" onclick="CrossfadeSample.crossfade(0);" value="type1">
-<input type="button" onclick="CrossfadeSample.crossfade(1);" value="type2">
-<input type="button" onclick="CrossfadeSample.crossfade(2);" value="type3">
 </div>
 </body>
 </html>
